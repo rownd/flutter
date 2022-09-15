@@ -1,0 +1,69 @@
+PODS:
+  - AnyCodable-FlightSchool (0.6.5)
+  - CodeScanner_Rownd (1.0.4)
+  - Flutter (1.0.0)
+  - Get (1.0.2)
+  - JWTDecode (3.0.0)
+  - LBBottomSheet (1.0.24)
+  - ReSwift (6.1.0)
+  - ReSwiftThunk (2.0.1):
+    - ReSwift (~> 6.0)
+    - ReSwiftThunk/Core (= 2.0.1)
+  - ReSwiftThunk/Core (2.0.1):
+    - ReSwift (~> 6.0)
+  - Rownd (1.10.0):
+    - AnyCodable-FlightSchool
+    - CodeScanner_Rownd
+    - Get
+    - JWTDecode
+    - LBBottomSheet
+    - ReSwift
+    - ReSwiftThunk
+    - Sodium
+    - SwiftKeychainWrapper
+  - rownd_flutter_plugin (1.0.0):
+    - Flutter
+    - Rownd
+  - Sodium (0.9.1)
+  - SwiftKeychainWrapper (4.0.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - rownd_flutter_plugin (from `.symlinks/plugins/rownd_flutter_plugin/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AnyCodable-FlightSchool
+    - CodeScanner_Rownd
+    - Get
+    - JWTDecode
+    - LBBottomSheet
+    - ReSwift
+    - ReSwiftThunk
+    - Rownd
+    - Sodium
+    - SwiftKeychainWrapper
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  rownd_flutter_plugin:
+    :path: ".symlinks/plugins/rownd_flutter_plugin/ios"
+
+SPEC CHECKSUMS:
+  AnyCodable-FlightSchool: 84b795a9d3ec7ba9e5488673d15cc1b37a566af4
+  CodeScanner_Rownd: 44f45bcf2ccabfd27e55ce0e9d4af0d2705ea4e6
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Get: 52a6cdac0658b2dd8b1799f86f4dcaeb06473f8b
+  JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
+  LBBottomSheet: 1d1a27847388b1a0fc266b439bcc9b386f792886
+  ReSwift: eab3c01e4279ba81b54a61e4fd6499634d20123a
+  ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
+  Rownd: 097f76c5295c38a28cfd7fcf1f42790ad44170bb
+  rownd_flutter_plugin: 8a62d30c6b47b749d9a9dd7428576a74939ac6ac
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+
+PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17
+
+COCOAPODS: 1.11.3
