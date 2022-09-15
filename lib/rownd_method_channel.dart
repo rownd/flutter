@@ -9,6 +9,9 @@ class MethodChannelRownd extends RowndPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('rownd_flutter_plugin');
 
+  @visibleForTesting
+  static const eventChannel = EventChannel('rownd_flutter_plugin_events');
+
   @override
   Future<String?> getPlatformVersion() async {
     final version =
@@ -18,6 +21,16 @@ class MethodChannelRownd extends RowndPlatform {
 
   @override
   requestSignIn([RowndSignInOptions? signInOpts]) {
-    methodChannel.invokeMethod('requestSignIn', signInOpts);
+    if (signInOpts != null) {
+      methodChannel.invokeMethod('requestSignIn',
+          {"postSignInRedirect": signInOpts.postSignInRedirect});
+    } else {
+      methodChannel.invokeMethod('requestSignIn');
+    }
+  }
+
+  // EVENTS
+  static Stream<int> get getRowndEventStream {
+    return eventChannel.receiveBroadcastStream().cast();
   }
 }

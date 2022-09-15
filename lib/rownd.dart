@@ -9,7 +9,7 @@ class RowndPlugin {
     RowndPlatform.instance.requestSignIn(signInOpts);
   }
 
-  signOut() {
+  void signOut() {
     RowndPlatform.instance.signOut();
   }
 }

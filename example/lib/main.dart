@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
+import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,7 +59,9 @@ class _MyAppState extends State<MyApp> {
           Center(child: Text('Running on: $_platformVersion\n')),
           ElevatedButton(
             onPressed: () {
-              _rowndFlutterPlugin.requestSignIn();
+              RowndSignInOptions signInOpts = RowndSignInOptions();
+              signInOpts.postSignInRedirect = "https://www.google.com";
+              _rowndFlutterPlugin.requestSignIn(signInOpts);
             },
             child: Text('Sign in'),
           ),

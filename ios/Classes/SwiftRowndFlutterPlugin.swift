@@ -13,10 +13,11 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
       switch call.method {
       case "requestSignIn":
           if let args = call.arguments as? Dictionary<String, Any>,
-             let isDebug = args["isDebug"] as? Bool {
-              
+             let postSignInRedirect = args["postSignInRedirect"] as? String {
+              Rownd.requestSignIn(RowndSignInOptions(postSignInRedirect: postSignInRedirect))
+          } else {
+              Rownd.requestSignIn()
           }
-          Rownd.requestSignIn()
       case "signOut":
           Rownd.signOut()
       case "getPlatformVersion":
