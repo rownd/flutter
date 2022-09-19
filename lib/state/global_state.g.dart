@@ -13,10 +13,14 @@ GlobalState _$GlobalStateFromJson(Map<String, dynamic> json) => GlobalState(
       auth: json['auth'] == null
           ? null
           : Auth.fromJson(json['auth'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GlobalStateToJson(GlobalState instance) =>
     <String, dynamic>{
       'appConfig': instance.app?.toJson(),
       'auth': instance.auth?.toJson(),
+      'user': instance.user?.toJson(),
     };

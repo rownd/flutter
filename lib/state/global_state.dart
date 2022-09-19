@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'domain/app.dart';
 import 'domain/auth.dart';
+import 'domain/user.dart';
 
 part 'global_state.g.dart';
 
@@ -11,11 +12,13 @@ class GlobalState {
   GlobalState({
     this.app,
     this.auth,
+    this.user,
   });
 
   @JsonKey(name: 'appConfig')
   App? app;
   Auth? auth;
+  User? user;
 
   factory GlobalState.fromJson(Map<String, dynamic> json) =>
       _$GlobalStateFromJson(json);
