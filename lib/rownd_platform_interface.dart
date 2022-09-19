@@ -1,6 +1,8 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'rownd_method_channel.dart';
+import 'rownd_event_channel.dart';
+import 'state/global_state.dart';
 
 abstract class RowndPlatform extends PlatformInterface {
   /// Constructs a RowndPlatform.
@@ -9,6 +11,7 @@ abstract class RowndPlatform extends PlatformInterface {
   static final Object _token = Object();
 
   static RowndPlatform _instance = MethodChannelRownd();
+  static RowndStateEventChannel _stateEventChannel = RowndStateEventChannel();
 
   /// The default instance of [RowndPluginPlatform] to use.
   ///
@@ -27,12 +30,20 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
+  void configure(String appKey) {
+    throw UnimplementedError('configure() has not been implemented.');
+  }
+
   void requestSignIn([RowndSignInOptions? signInOpts]) {
     throw UnimplementedError('requestSignIn() has not been implemented.');
   }
 
   void signOut() {
     throw UnimplementedError('signOut() has not been implemented.');
+  }
+
+  GlobalStateNotifier state() {
+    throw UnimplementedError('state() has not been implemented.');
   }
 }
 

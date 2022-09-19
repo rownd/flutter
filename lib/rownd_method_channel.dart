@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'rownd_platform_interface.dart';
+import 'rownd_event_channel.dart';
+import 'state/global_state.dart';
 
 /// An implementation of [RowndPlatform] that uses method channels.
 class MethodChannelRownd extends RowndPlatform {
@@ -9,14 +11,22 @@ class MethodChannelRownd extends RowndPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('rownd_flutter_plugin');
 
-  @visibleForTesting
-  static const eventChannel = EventChannel('rownd_flutter_plugin_events');
+  final eventChannel = RowndStateEventChannel();
+
+  MethodChannelRownd() {
+    eventChannel.listen();
+  }
 
   @override
   Future<String?> getPlatformVersion() async {
     final version =
         await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  @override
+  void configure(String appKey) {
+    methodChannel.invokeMethod('configure', {"appKey": appKey});
   }
 
   @override
@@ -29,8 +39,18 @@ class MethodChannelRownd extends RowndPlatform {
     }
   }
 
-  // EVENTS
-  static Stream<int> get getRowndEventStream {
-    return eventChannel.receiveBroadcastStream().cast();
+  @override
+  signOut() {
+    methodChannel.invokeMethod('signOut');
   }
+
+  @override
+  GlobalStateNotifier state() {
+    return eventChannel.stateNotifier;
+  }
+
+  // @override
+  // state() {
+  //   return eventChannel
+  // }
 }

@@ -18,6 +18,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^6.0.3
+
   rownd_flutter_plugin:
     # When depending on this package from a real application you should use:
     #   rownd_flutter_plugin: ^x.y.z

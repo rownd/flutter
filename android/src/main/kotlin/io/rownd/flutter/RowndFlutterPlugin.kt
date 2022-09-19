@@ -1,4 +1,4 @@
-package io.rownd.rownd_flutter_plugin
+package io.rownd.flutter
 
 import androidx.annotation.NonNull
 

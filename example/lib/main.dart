@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
+import 'package:rownd_flutter_plugin/state/global_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +26,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
+
+    // _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -50,23 +54,33 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Column(children: [
-          Center(child: Text('Running on: $_platformVersion\n')),
-          ElevatedButton(
-            onPressed: () {
-              RowndSignInOptions signInOpts = RowndSignInOptions();
-              signInOpts.postSignInRedirect = "https://www.google.com";
-              _rowndFlutterPlugin.requestSignIn(signInOpts);
-            },
-            child: Text('Sign in'),
+    return ChangeNotifierProvider(
+        create: (_) => _rowndFlutterPlugin.state(),
+        child: MaterialApp(
+          home: Scaffold(
+            appBar: AppBar(
+              title: const Text('Plugin example app'),
+            ),
+            body: Column(children: [
+              Center(child: Text('Running on: $_platformVersion\n')),
+              Consumer<GlobalStateNotifier>(
+                builder: (_, rownd, __) => ElevatedButton(
+                    onPressed: () {
+                      if (rownd.state.auth?.isAuthenticated ?? false) {
+                        _rowndFlutterPlugin.signOut();
+                      } else {
+                        RowndSignInOptions signInOpts = RowndSignInOptions();
+                        signInOpts.postSignInRedirect =
+                            "https://www.google.com";
+                        _rowndFlutterPlugin.requestSignIn(signInOpts);
+                      }
+                    },
+                    child: Text((rownd.state.auth?.isAuthenticated ?? false)
+                        ? 'Sign out'
+                        : 'Sign in')),
+              ),
+            ]),
           ),
-        ]),
-      ),
-    );
+        ));
   }
 }
