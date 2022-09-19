@@ -10,7 +10,7 @@ import Rownd
   ) -> Bool {
     Rownd.config.apiUrl = "https://api.us-east-2.dev.rownd.io"
     Task {
-      await Rownd.configure(launchOptions: launchOptions, appKey:  "b60bc454-c45f-47a2-8f8a-12b2062f5a77")
+      // await Rownd.configure(launchOptions: launchOptions, appKey:  "b60bc454-c45f-47a2-8f8a-12b2062f5a77")
     }
     GeneratedPluginRegistrant.register(with: self)
 

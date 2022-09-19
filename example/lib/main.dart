@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPlatformState();
 
-    // _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77");
+    _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
