@@ -30,7 +30,7 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  void configure(String appKey) {
+  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
     throw UnimplementedError('configure() has not been implemented.');
   }
 

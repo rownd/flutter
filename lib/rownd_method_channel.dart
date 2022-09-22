@@ -25,8 +25,12 @@ class MethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(String appKey) {
-    methodChannel.invokeMethod('configure', {"appKey": appKey});
+  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
+    methodChannel.invokeMethod('configure', {
+      "appKey": appKey,
+      "apiUrl": apiUrl,
+      "baseUrl": baseUrl,
+    });
   }
 
   @override
@@ -48,9 +52,4 @@ class MethodChannelRownd extends RowndPlatform {
   GlobalStateNotifier state() {
     return eventChannel.stateNotifier;
   }
-
-  // @override
-  // state() {
-  //   return eventChannel
-  // }
 }

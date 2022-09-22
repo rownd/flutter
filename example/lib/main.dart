@@ -27,7 +27,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPlatformState();
 
-    _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77");
+    _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77",
+        "https://api.us-east-2.dev.rownd.io", "https://hub.rownd.workers.dev");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider(
         create: (_) => _rowndFlutterPlugin.state(),
         child: MaterialApp(
+          themeMode: ThemeMode.system,
           home: Scaffold(
             appBar: AppBar(
               title: const Text('Plugin example app'),
