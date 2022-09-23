@@ -62,6 +62,7 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         }
       }
       "signOut" -> Rownd.signOut()
+      "manageAccount" -> Rownd.manageAccount()
       else -> result.notImplemented()
     }
   }

@@ -59,14 +59,15 @@ class _MyAppState extends State<MyApp> {
         create: (_) => _rowndFlutterPlugin.state(),
         child: MaterialApp(
           themeMode: ThemeMode.system,
+          darkTheme: ThemeData(brightness: Brightness.dark),
           home: Scaffold(
             appBar: AppBar(
               title: const Text('Plugin example app'),
             ),
-            body: Column(children: [
-              Center(child: Text('Running on: $_platformVersion\n')),
-              Consumer<GlobalStateNotifier>(
-                builder: (_, rownd, __) => ElevatedButton(
+            body: Consumer<GlobalStateNotifier>(
+              builder: (_, rownd, __) => Column(children: [
+                Center(child: Text('Running on: $_platformVersion\n')),
+                ElevatedButton(
                     onPressed: () {
                       if (rownd.state.auth?.isAuthenticated ?? false) {
                         _rowndFlutterPlugin.signOut();
@@ -80,8 +81,14 @@ class _MyAppState extends State<MyApp> {
                     child: Text((rownd.state.auth?.isAuthenticated ?? false)
                         ? 'Sign out'
                         : 'Sign in')),
-              ),
-            ]),
+                if (rownd.state.auth?.isAuthenticated ?? false)
+                  ElevatedButton(
+                      onPressed: () {
+                        _rowndFlutterPlugin.manageAccount();
+                      },
+                      child: const Text('Manage account'))
+              ]),
+            ),
           ),
         ));
   }

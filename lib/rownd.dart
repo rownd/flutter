@@ -21,4 +21,8 @@ class RowndPlugin {
   void signOut() {
     RowndPlatform.instance.signOut();
   }
+
+  void manageAccount() {
+    RowndPlatform.instance.manageAccount();
+  }
 }

@@ -49,6 +49,11 @@ class MethodChannelRownd extends RowndPlatform {
   }
 
   @override
+  manageAccount() {
+    methodChannel.invokeMethod('manageAccount');
+  }
+
+  @override
   GlobalStateNotifier state() {
     return eventChannel.stateNotifier;
   }

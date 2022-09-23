@@ -42,6 +42,10 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('signOut() has not been implemented.');
   }
 
+  void manageAccount() {
+    throw UnimplementedError('manageAccount() has not been implemented.');
+  }
+
   GlobalStateNotifier state() {
     throw UnimplementedError('state() has not been implemented.');
   }

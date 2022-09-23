@@ -36,6 +36,8 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
           }
       case "signOut":
           Rownd.signOut()
+      case "manageAccount":
+          Rownd.manageAccount()
       case "getPlatformVersion":
           result("iOS " + UIDevice.current.systemVersion)
       default:

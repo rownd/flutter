@@ -27,7 +27,6 @@ class StateStreamHandler : EventChannel.StreamHandler {
     private fun startListeningToStateChanges() {
         coroutineScope = CoroutineScope(Dispatchers.IO).launch {
             Rownd.state.collect {
-
                 uiThreadHandler.post{
                     eventSink?.success(Json.encodeToString(GlobalState.serializer(), it))
                 }

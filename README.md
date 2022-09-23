@@ -168,6 +168,10 @@ Requests that the user sign in. The `options` parameter is optional and can be u
 
 Signs the user out.
 
+### `manageAccount()`
+
+Displays the current user's profile information, allowing them to update it.
+
 ### `state()`
 
 Returns a `GlobalStateNotifier` object that can be used to listen for changes to the Rownd state.
