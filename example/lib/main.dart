@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPlatformState();
 
-    _rowndFlutterPlugin.configure("b60bc454-c45f-47a2-8f8a-12b2062f5a77",
-        "https://api.us-east-2.dev.rownd.io", "https://hub.rownd.workers.dev");
+    _rowndFlutterPlugin.configure("5b445042-7c8e-4c84-b451-e25c608e8bc0",
+        "https://api.us-east-2.dev.rownd.io", "https://hub.dev.rownd.io");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -73,8 +73,7 @@ class _MyAppState extends State<MyApp> {
                         _rowndFlutterPlugin.signOut();
                       } else {
                         RowndSignInOptions signInOpts = RowndSignInOptions();
-                        signInOpts.postSignInRedirect =
-                            "https://www.google.com";
+                        signInOpts.postSignInRedirect = "NATIVE_APP";
                         _rowndFlutterPlugin.requestSignIn(signInOpts);
                       }
                     },
