@@ -1,4 +1,4 @@
-# Miscellaneous
+i# Miscellaneous
 *.class
 *.log
 *.pyc
@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+node_modules/
 
 # IntelliJ related
 *.iml
