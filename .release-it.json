@@ -21,6 +21,7 @@
       }
     },
     "hooks": {
-        "after:release": "dart pub publish"
+        "after:bump": "dart pub publish --dry-run",
+        "after:release": "dart pub publish --force"
     }
   }
