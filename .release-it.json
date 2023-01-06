@@ -14,7 +14,10 @@
       },
       "@release-it/bumper": {
         "in": "pubspec.yaml",
-        "out": "pubspec.yaml"
+        "out": [
+            "pubspec.yaml",
+            "README.md"
+        ]
       }
     },
     "hooks": {
