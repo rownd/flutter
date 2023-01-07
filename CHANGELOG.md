@@ -1,5 +1,12 @@
 
 
+## [1.2.2](https://github.com/rownd/flutter/compare/1.2.1...1.2.2) (2023-01-07)
+
+
+### Bug Fixes
+
+* **ios:** upstream apple sign-in fixes ([213bc0b](https://github.com/rownd/flutter/commit/213bc0bca6f9f55be4e3d3ad079a48519f55f04a))
+
 ## [1.2.1](https://github.com/rownd/flutter/compare/1.2.0...1.2.1) (2023-01-06)
 
 
