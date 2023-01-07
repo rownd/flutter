@@ -16,7 +16,7 @@ Provides access to Rownd APIs on iOS when using Flutter.
   s.source_files = 'Classes/**/*'
   
   s.dependency 'Flutter'
-  s.dependency 'Rownd', '~> 2.2.1'
+  s.dependency 'Rownd', '~> 2.2.2'
   
   s.platform = :ios, '14.0'
 

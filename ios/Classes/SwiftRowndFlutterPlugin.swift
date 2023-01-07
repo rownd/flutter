@@ -23,6 +23,9 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
       case "configure":
           if let args = call.arguments as? Dictionary<String, Any>,
              let appKey = args["appKey"] as? String {
+                if let baseUrl = args["baseUrl"] as? String {
+                    Rownd.config.baseUrl = baseUrl
+                }
               Task {
                   await Rownd.configure(launchOptions: nil, appKey: appKey);
               }

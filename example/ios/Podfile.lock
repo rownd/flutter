@@ -22,13 +22,13 @@ PODS:
   - Kronos (4.2.1)
   - LBBottomSheet (1.0.24)
   - lottie-ios (3.4.4)
-  - ReSwift (6.1.0)
+  - ReSwift (6.1.1)
   - ReSwiftThunk (2.0.1):
     - ReSwift (~> 6.0)
     - ReSwiftThunk/Core (= 2.0.1)
   - ReSwiftThunk/Core (2.0.1):
     - ReSwift (~> 6.0)
-  - Rownd (2.2.1):
+  - Rownd (2.2.2):
     - AnyCodable-FlightSchool (~> 0.6.5)
     - CodeScanner_Rownd (~> 2.2.1)
     - Factory (~> 1.2.8)
@@ -44,7 +44,7 @@ PODS:
     - SwiftKeychainWrapper (~> 4.0.1)
   - rownd_flutter_plugin (1.0.0):
     - Flutter
-    - Rownd (~> 2.2.1)
+    - Rownd (~> 2.2.2)
   - Sodium (0.9.1)
   - SwiftKeychainWrapper (4.0.1)
 
@@ -92,10 +92,10 @@ SPEC CHECKSUMS:
   Kronos: 0ca73a1c00dc9a49a0bab4a6ed42f282562a7058
   LBBottomSheet: 1d1a27847388b1a0fc266b439bcc9b386f792886
   lottie-ios: 8f97d3271e155c2d688875c29cd3c74908aef5f8
-  ReSwift: eab3c01e4279ba81b54a61e4fd6499634d20123a
+  ReSwift: 929afd2c897f0d33c76c730710a31bb2d2a66713
   ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
-  Rownd: f6f27922c5f7d66634fe835cf33652a346621a50
-  rownd_flutter_plugin: ce79a8ff16269bba2db66a5fe85c3c11e0c716a1
+  Rownd: 4325086a024a4ec2559a8d8ca430074670039ef8
+  rownd_flutter_plugin: b94474addf891262ab2b77695de6230c72807b15
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
