@@ -8,11 +8,18 @@ import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  late RowndPlugin rowndPlugin;
+
+  MyApp({super.key}) {
+    WidgetsFlutterBinding.ensureInitialized();
+    rowndPlugin = RowndPlugin();
+    rowndPlugin.configure("5b445042-7c8e-4c84-b451-e25c608e8bc0",
+        "https://api.us-east-2.dev.rownd.io", "https://hub.dev.rownd.io");
+  }
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -20,15 +27,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _rowndFlutterPlugin = RowndPlugin();
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-
-    _rowndFlutterPlugin.configure("5b445042-7c8e-4c84-b451-e25c608e8bc0",
-        "https://api.us-east-2.dev.rownd.io", "https://hub.dev.rownd.io");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -37,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion = await _rowndFlutterPlugin.getPlatformVersion() ??
+      platformVersion = await widget.rowndPlugin.getPlatformVersion() ??
           'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
@@ -56,7 +59,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => _rowndFlutterPlugin.state(),
+        create: (_) => widget.rowndPlugin.state(),
         child: MaterialApp(
           themeMode: ThemeMode.system,
           darkTheme: ThemeData(brightness: Brightness.dark),
@@ -70,11 +73,11 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                     onPressed: () {
                       if (rownd.state.auth?.isAuthenticated ?? false) {
-                        _rowndFlutterPlugin.signOut();
+                        widget.rowndPlugin.signOut();
                       } else {
                         RowndSignInOptions signInOpts = RowndSignInOptions();
                         signInOpts.postSignInRedirect = "NATIVE_APP";
-                        _rowndFlutterPlugin.requestSignIn(signInOpts);
+                        widget.rowndPlugin.requestSignIn(signInOpts);
                       }
                     },
                     child: Text((rownd.state.auth?.isAuthenticated ?? false)
@@ -83,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                 if (rownd.state.auth?.isAuthenticated ?? false)
                   ElevatedButton(
                       onPressed: () {
-                        _rowndFlutterPlugin.manageAccount();
+                        widget.rowndPlugin.manageAccount();
                       },
                       child: const Text('Manage account'))
               ]),
