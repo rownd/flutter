@@ -1,5 +1,12 @@
 
 
+## [1.2.3](https://github.com/rownd/flutter/compare/1.2.2...1.2.3) (2023-01-13)
+
+
+### Bug Fixes
+
+* **google:** sign-in w/ google dialog is missing ([#3](https://github.com/rownd/flutter/issues/3)) ([383207f](https://github.com/rownd/flutter/commit/383207f952b0ad3bd6cef856b7c837064546f7e9))
+
 ## [1.2.2](https://github.com/rownd/flutter/compare/1.2.1...1.2.2) (2023-01-07)
 
 

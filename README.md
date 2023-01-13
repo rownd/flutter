@@ -15,7 +15,7 @@ name: my_app
 ...
 
 dependencies:
-    rownd_flutter_plugin: ^1.2.2
+    rownd_flutter_plugin: ^1.2.3
 ```
 
 If you don't have one already, be sure to obtain an app key from the [Rownd dashboard](https://app.rownd.io) for use in the next step.
