@@ -22,46 +22,6 @@
 
 # will shrink SendBird code
 
-# Keep `Companion` object fields of serializable classes.
-# This avoids serializer lookup through `getDeclaredClasses` as done for named companion objects.
-#-if @kotlinx.serialization.Serializable class **
-#-keepclassmembers class <1> {
-#    static <1>$Companion Companion;
-#}
-#
-# Keep `serializer()` on companion objects (both default and named) of serializable classes.
--if @kotlinx.serialization.Serializable class ** {
-    static **$* *;
-}
--keepclassmembers class <1>$<3> {
-    kotlinx.serialization.KSerializer serializer(...);
-}
-
-# Keep `INSTANCE.serializer()` of serializable objects.
--if @kotlinx.serialization.Serializable class ** {
-    public static ** INSTANCE;
-}
--keepclassmembers class <1> {
-    public static <1> INSTANCE;
-    kotlinx.serialization.KSerializer serializer(...);
-}
-
-# @Serializable and @Polymorphic are used at runtime for polymorphic serialization.
--keepattributes RuntimeVisibleAnnotations,AnnotationDefault
-
--keepclassmembers class kotlinx.** {
-    volatile <fields>;
-}
-
--keepclassmembers class io.ktor.** { volatile <fields>; }
--keep public class org.slf4j.** { *; }
--keep public class ch.** { *; }
-
--keep class com.sun.jna.** { *; }
--keep class * implements com.sun.jna.** { *; }
-
--keep public class * extends androidx.lifecycle.ViewModel {*;}
-
 -if @kotlinx.serialization.Serializable class **
 -keepclassmembers class <1> {
    static <1>$Companion Companion;
@@ -86,3 +46,13 @@
 
 # @Serializable and @Polymorphic are used at runtime for polymorphic serialization.
 -keepattributes RuntimeVisibleAnnotations,AnnotationDefault,Annotation,InnerClasses
+
+# Suppress warnings about missing AWT classes (which aren't used in Android)
+-dontwarn java.awt.*
+
+# libsodium uses jna
+-keep class com.sun.jna.* { *; }
+-keepclassmembers class * extends com.sun.jna.* { public *; }
+
+# ViewModel names are used at runtime
+-keep public class * extends androidx.lifecycle.ViewModel {*;}

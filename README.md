@@ -148,6 +148,8 @@ There are a couple of configuration settings that must be applied to the platfor
 class MainActivity: FlutterFragmentActivity() {}
 ```
 
+4) Check and update your ProGuard config using [the rules from our Android SDK](https://github.com/rownd/android/blob/main/README.md#proguard-config).
+
 ## API
 
 ### `configure(String appKey)`
