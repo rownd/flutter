@@ -1,26 +1,26 @@
 PODS:
   - AnyCodable-FlightSchool (0.6.7)
-  - AppAuth (1.6.0):
-    - AppAuth/Core (= 1.6.0)
-    - AppAuth/ExternalUserAgent (= 1.6.0)
-  - AppAuth/Core (1.6.0)
-  - AppAuth/ExternalUserAgent (1.6.0):
+  - AppAuth (1.6.2):
+    - AppAuth/Core (= 1.6.2)
+    - AppAuth/ExternalUserAgent (= 1.6.2)
+  - AppAuth/Core (1.6.2)
+  - AppAuth/ExternalUserAgent (1.6.2):
     - AppAuth/Core
   - CodeScanner_Rownd (2.2.1)
   - Factory (1.2.9)
   - Flutter (1.0.0)
   - Get (2.0.1)
-  - GoogleSignIn (6.2.4):
+  - GoogleSignIn (7.0.0):
     - AppAuth (~> 1.5)
-    - GTMAppAuth (~> 1.3)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
-  - GTMAppAuth (1.3.1):
+    - GTMAppAuth (< 3.0, >= 1.3)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.1)
+  - GTMAppAuth (2.0.0):
     - AppAuth/Core (~> 1.6)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (2.3.0)
-  - JWTDecode (3.0.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 1.5)
+  - GTMSessionFetcher/Core (3.1.1)
+  - JWTDecode (3.0.1)
   - Kronos (4.2.1)
-  - LBBottomSheet (1.0.24)
+  - LBBottomSheet (1.1.7)
   - lottie-ios (3.4.4)
   - ReSwift (6.1.1)
   - ReSwiftThunk (2.0.1):
@@ -28,15 +28,15 @@ PODS:
     - ReSwiftThunk/Core (= 2.0.1)
   - ReSwiftThunk/Core (2.0.1):
     - ReSwift (~> 6.0)
-  - Rownd (2.2.2):
+  - Rownd (2.6.1):
     - AnyCodable-FlightSchool (~> 0.6.5)
     - CodeScanner_Rownd (~> 2.2.1)
     - Factory (~> 1.2.8)
     - Get (~> 2.0.1)
-    - GoogleSignIn (~> 6.2.4)
+    - GoogleSignIn (~> 7.0.0)
     - JWTDecode (~> 3.0.0)
     - Kronos (~> 4.2.1)
-    - LBBottomSheet (~> 1.0.24)
+    - LBBottomSheet (~> 1.1.7)
     - lottie-ios (~> 3.4.3)
     - ReSwift (~> 6.1.0)
     - ReSwiftThunk (~> 2.0.1)
@@ -44,7 +44,7 @@ PODS:
     - SwiftKeychainWrapper (~> 4.0.1)
   - rownd_flutter_plugin (1.0.0):
     - Flutter
-    - Rownd (~> 2.2.2)
+    - Rownd (~> 2.6.1)
   - Sodium (0.9.1)
   - SwiftKeychainWrapper (4.0.1)
 
@@ -80,25 +80,25 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AnyCodable-FlightSchool: 261cbe76757802b17d471b9059b21e6fa5edf57b
-  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
+  AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   CodeScanner_Rownd: 43ea1ea198c17653c32c31e797e274c0d7a695ae
   Factory: 883df5a392a7f4110597c42652b8db9c07618a09
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   Get: d2c1fa40936760c47dcd3956e9eb26dc39fd76ba
-  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
-  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  JWTDecode: 82480a7173f8a811954e7e14a2b59f688ca4222a
+  GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
+  GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
+  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  JWTDecode: 2eed97c2fa46ccaf3049a787004eedf0be474a87
   Kronos: 0ca73a1c00dc9a49a0bab4a6ed42f282562a7058
-  LBBottomSheet: 1d1a27847388b1a0fc266b439bcc9b386f792886
+  LBBottomSheet: 8ee6d3a86fcfc583bec73aa3bfcb776b2763f59d
   lottie-ios: 8f97d3271e155c2d688875c29cd3c74908aef5f8
   ReSwift: 929afd2c897f0d33c76c730710a31bb2d2a66713
   ReSwiftThunk: 7ca5145764be6f30b62db88a52d170133954629e
-  Rownd: 4325086a024a4ec2559a8d8ca430074670039ef8
-  rownd_flutter_plugin: b94474addf891262ab2b77695de6230c72807b15
+  Rownd: 8e3a93a0c4ce46dbab5e73de46b1f62b94929dae
+  rownd_flutter_plugin: 89bedda13562b0451caefae48b9cf7de308b4f11
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17
+PODFILE CHECKSUM: 12c8d089b40ae48ea6bd79c16ae3c448f4ef698b
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

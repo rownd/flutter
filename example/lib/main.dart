@@ -76,7 +76,9 @@ class _MyAppState extends State<MyApp> {
                         widget.rowndPlugin.signOut();
                       } else {
                         RowndSignInOptions signInOpts = RowndSignInOptions();
-                        signInOpts.postSignInRedirect = "NATIVE_APP";
+                        // signInOpts.postSignInRedirect = "https://www.espn.com/";
+                        // signInOpts.intent = RowndSignInIntent.SignIn;
+                        // signInOpts.method = RowndSignInMethod.Google;
                         widget.rowndPlugin.requestSignIn(signInOpts);
                       }
                     },
