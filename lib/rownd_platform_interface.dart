@@ -51,6 +51,24 @@ abstract class RowndPlatform extends PlatformInterface {
   }
 }
 
+enum RowndSignInIntent { SignIn, SignUp }
+
+const Map<RowndSignInIntent, String> RowndSignInIntentStrings = {
+  RowndSignInIntent.SignIn: 'sign_in',
+  RowndSignInIntent.SignUp: 'sign_up'
+};
+
+enum RowndSignInMethod { Apple, Google, Passkey, Guest }
+
+const Map<RowndSignInMethod, String> RowndSignInMethodStrings = {
+  RowndSignInMethod.Apple: 'apple',
+  RowndSignInMethod.Google: 'google',
+  RowndSignInMethod.Guest: 'guest',
+  RowndSignInMethod.Passkey: 'passkey',
+};
+
 class RowndSignInOptions {
   String? postSignInRedirect;
+  RowndSignInIntent? intent;
+  RowndSignInMethod? method;
 }

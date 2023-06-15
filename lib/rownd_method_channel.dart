@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 
 import 'rownd_platform_interface.dart';
 import 'rownd_event_channel.dart';
@@ -36,8 +37,22 @@ class MethodChannelRownd extends RowndPlatform {
   @override
   requestSignIn([RowndSignInOptions? signInOpts]) {
     if (signInOpts != null) {
-      methodChannel.invokeMethod('requestSignIn',
-          {"postSignInRedirect": signInOpts.postSignInRedirect});
+      final Map<String, String> signInOptionsMap = {};
+
+      final intent = signInOpts.intent;
+      if (intent != null) {
+        signInOptionsMap['intent'] = RowndSignInIntentStrings[intent]!;
+      }
+      final postSignInRedirect = signInOpts.postSignInRedirect;
+      if (postSignInRedirect != null) {
+        signInOptionsMap['postSignInRedirect'] = postSignInRedirect;
+      }
+
+      final method = signInOpts.method;
+      if (method != null) {
+        signInOptionsMap['method'] = RowndSignInMethodStrings[method]!;
+      }
+      methodChannel.invokeMethod('requestSignIn', signInOptionsMap);
     } else {
       methodChannel.invokeMethod('requestSignIn');
     }
