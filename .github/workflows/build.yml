@@ -31,7 +31,7 @@ jobs:
       - run: flutter build appbundle
         working-directory: ./example
 
-  main:
+  build-ios:
     runs-on: macos-latest
     steps:
       - name: Clone repository
