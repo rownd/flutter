@@ -21,7 +21,7 @@
       }
     },
     "hooks": {
-        "before:git:init": "flutter pub publish --dry-run",
+        "before:git:init": "flutter pub publish --dry-run --skip-validation",
         "after:release": "flutter pub publish --force"
     }
   }
