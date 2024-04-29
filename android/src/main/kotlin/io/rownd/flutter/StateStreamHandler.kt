@@ -6,7 +6,6 @@ import io.flutter.plugin.common.EventChannel
 import io.rownd.android.Rownd
 import io.rownd.android.models.repos.GlobalState
 import kotlinx.coroutines.*
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class StateStreamHandler : EventChannel.StreamHandler {

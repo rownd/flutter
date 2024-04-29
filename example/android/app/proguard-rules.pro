@@ -56,3 +56,9 @@
 
 # ViewModel names are used at runtime
 -keep public class * extends androidx.lifecycle.ViewModel {*;}
+
+#retrofit/okhttp3
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
+-dontwarn org.slf4j.**

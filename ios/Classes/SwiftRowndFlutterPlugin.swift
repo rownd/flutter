@@ -9,42 +9,66 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
     private static let methodEventChannel = "rownd_flutter_plugin"
     private static let stateEventChannel = "rownd_channel_events/state"
 
-  public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: methodEventChannel, binaryMessenger: registrar.messenger())
-    let instance = SwiftRowndFlutterPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        let channel = FlutterMethodChannel(name: methodEventChannel, binaryMessenger: registrar.messenger())
+        let instance = SwiftRowndFlutterPlugin()
+        registrar.addApplicationDelegate(instance)
+        registrar.addMethodCallDelegate(instance, channel: channel)
 
-      FlutterEventChannel(name: stateEventChannel, binaryMessenger: registrar.messenger())
-          .setStreamHandler(StateStreamHandler())
-  }
+        FlutterEventChannel(name: stateEventChannel, binaryMessenger: registrar.messenger())
+            .setStreamHandler(StateStreamHandler())
+    }
 
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-      switch call.method {
-      case "configure":
-          if let args = call.arguments as? Dictionary<String, Any>,
-             let appKey = args["appKey"] as? String {
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        if let launchUrl = launchOptions?[.url] as? URL {
+            Rownd.handleSignInLink(url: launchUrl)
+        }
+
+        return true
+    }
+
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return Rownd.handleSignInLink(url: url)
+    }
+
+    public func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
+        if userActivity.webpageURL != nil {
+            return Rownd.handleSignInLink(url: userActivity.webpageURL)
+        }
+        return false
+    }
+
+    public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        switch call.method {
+        case "configure":
+            if let args = call.arguments as? [String: Any],
+               let appKey = args["appKey"] as? String {
                 if let baseUrl = args["baseUrl"] as? String {
                     Rownd.config.baseUrl = baseUrl
                 }
-              Task {
-                  await Rownd.configure(launchOptions: nil, appKey: appKey);
-              }
-          }
-      case "requestSignIn":
-          if let args = call.arguments as? Dictionary<String, Any>,
-             let postSignInRedirect = args["postSignInRedirect"] as? String {
-              Rownd.requestSignIn(RowndSignInOptions(postSignInRedirect: postSignInRedirect))
-          } else {
-              Rownd.requestSignIn()
-          }
-      case "signOut":
-          Rownd.signOut()
-      case "manageAccount":
-          Rownd.manageAccount()
-      case "getPlatformVersion":
-          result("iOS " + UIDevice.current.systemVersion)
-      default:
-          result(FlutterMethodNotImplemented)
-      }
-  }
+
+                if let apiUrl = args["apiUrl"] as? String {
+                    Rownd.config.apiUrl = apiUrl
+                }
+                Task {
+                    await Rownd.configure(launchOptions: nil, appKey: appKey)
+                }
+            }
+        case "requestSignIn":
+            if let args = call.arguments as? [String: Any],
+               let postSignInRedirect = args["postSignInRedirect"] as? String {
+                Rownd.requestSignIn(RowndSignInOptions(postSignInRedirect: postSignInRedirect))
+            } else {
+                Rownd.requestSignIn()
+            }
+        case "signOut":
+            Rownd.signOut()
+        case "manageAccount":
+            Rownd.manageAccount()
+        case "getPlatformVersion":
+            result("iOS " + UIDevice.current.systemVersion)
+        default:
+            result(FlutterMethodNotImplemented)
+        }
+    }
 }

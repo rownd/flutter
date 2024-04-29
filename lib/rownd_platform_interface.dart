@@ -11,7 +11,7 @@ abstract class RowndPlatform extends PlatformInterface {
   static final Object _token = Object();
 
   static RowndPlatform _instance = MethodChannelRownd();
-  static RowndStateEventChannel _stateEventChannel = RowndStateEventChannel();
+  static final RowndStateEventChannel _stateEventChannel = RowndStateEventChannel();
 
   /// The default instance of [RowndPluginPlatform] to use.
   ///
