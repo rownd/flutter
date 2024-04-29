@@ -21,7 +21,7 @@
       }
     },
     "hooks": {
-        "before:git:init": "dart pub publish --dry-run",
-        "after:release": "dart pub publish --force"
+        "before:git:init": "flutter pub publish --dry-run",
+        "after:release": "flutter pub publish --force"
     }
   }
