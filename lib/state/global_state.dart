@@ -28,6 +28,7 @@ class GlobalState {
 
 class GlobalStateNotifier extends ChangeNotifier {
   GlobalStateNotifier({GlobalState? state}) : _state = state ?? GlobalState();
+  bool isDisposed = false;
 
   GlobalState _state;
 
@@ -35,6 +36,17 @@ class GlobalStateNotifier extends ChangeNotifier {
 
   set state(GlobalState state) {
     _state = state;
+
+    if (isDisposed) {
+      return;
+    }
+
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    isDisposed = true;
+    super.dispose();
   }
 }
