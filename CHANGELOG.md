@@ -1,5 +1,12 @@
 
 
+## [1.3.1](https://github.com/rownd/flutter/compare/1.3.0...1.3.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* **state:** crash notifying disposed listeners ([8cd9789](https://github.com/rownd/flutter/commit/8cd9789ea12e1ff248e7008db1d07bf102057266))
+
 # [1.3.0](https://github.com/rownd/flutter/compare/1.2.3...1.3.0) (2024-04-29)
 
 ## [1.2.3](https://github.com/rownd/flutter/compare/1.2.2...1.2.3) (2023-01-13)
