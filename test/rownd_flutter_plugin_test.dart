@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rownd_flutter_plugin/mobile/rownd_method_channel.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
-import 'package:rownd_flutter_plugin/rownd_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 
@@ -41,8 +41,8 @@ class MockRowndFlutterPluginPlatform
 void main() {
   final RowndPlatform initialPlatform = RowndPlatform.instance;
 
-  test('$MethodChannelRownd is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelRownd>());
+  test('$MobileMethodChannelRownd is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MobileMethodChannelRownd>());
   });
 
   test('getPlatformVersion', () async {

@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'rownd_platform_interface.dart';
+import '../rownd_platform_interface.dart';
 import 'rownd_event_channel.dart';
-import 'state/global_state.dart';
+import '../state/global_state.dart';
 
 /// An implementation of [RowndPlatform] that uses method channels.
-class MethodChannelRownd extends RowndPlatform {
+class MobileMethodChannelRownd extends RowndPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('rownd_flutter_plugin');
 
-  final eventChannel = RowndStateEventChannel();
+  final eventChannel = RowndStateMobileEventChannel();
 
   MethodChannelRownd() {
     eventChannel.listen();

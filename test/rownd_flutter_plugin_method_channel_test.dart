@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rownd_flutter_plugin/rownd_method_channel.dart';
+import 'package:rownd_flutter_plugin/mobile/rownd_method_channel.dart';
 
 void main() {
-  MethodChannelRownd platform = MethodChannelRownd();
+  MobileMethodChannelRownd platform = MobileMethodChannelRownd();
   const MethodChannel channel = MethodChannel('rownd_flutter_plugin');
 
   TestWidgetsFlutterBinding.ensureInitialized();

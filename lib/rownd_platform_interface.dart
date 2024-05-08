@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'rownd_method_channel.dart';
-import 'rownd_event_channel.dart';
+import 'web/rownd_method_channel.dart';
+import 'mobile/rownd_method_channel.dart';
+
 import 'state/global_state.dart';
 
 abstract class RowndPlatform extends PlatformInterface {
@@ -10,8 +12,15 @@ abstract class RowndPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static RowndPlatform _instance = MethodChannelRownd();
-  static final RowndStateEventChannel _stateEventChannel = RowndStateEventChannel();
+  static RowndPlatform _instance = _getDefaultPlatform();
+
+  static RowndPlatform _getDefaultPlatform() {
+    if (kIsWeb) {
+      return WebMethodChannelRownd();
+    } else {
+      return MobileMethodChannelRownd();
+    }
+  }
 
   /// The default instance of [RowndPluginPlatform] to use.
   ///

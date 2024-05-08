@@ -5,7 +5,7 @@ import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 
-class RowndStateEventChannel {
+class RowndStateMobileEventChannel {
   // Global State Event Channel
   final _rowndStateChannel = const EventChannel('rownd_channel_events/state');
   Stream<void>? _rowndStateStream;
