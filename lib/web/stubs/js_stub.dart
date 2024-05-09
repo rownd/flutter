@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 allowInterop<F extends Function>(F f) {
   throw UnimplementedError("allowInterop is not implemented");
 }
@@ -82,7 +80,7 @@ class JsObject {
   external dynamic callMethod(Object method, [List? args]);
 }
 
-class JsArray<E> extends JsObject with ListMixin<E> {
+class JsArray<E> extends JsObject {
   /// Creates an empty JavaScript array.
   external factory JsArray();
 
