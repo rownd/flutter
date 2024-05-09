@@ -5,8 +5,8 @@ import 'package:rownd_flutter_plugin/state/domain/auth.dart';
 import 'package:rownd_flutter_plugin/state/domain/user.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 
-import 'dart:html';
-import 'dart:js' as js;
+import 'stubs/js_stub.dart' if (dart.library.js) 'dart:js' as js;
+import 'stubs/web_stub.dart' if (dart.library.js) 'package:web/web.dart' as web;
 
 class WebState {
   WebState({this.user, this.app, this.auth});
@@ -45,10 +45,9 @@ class RowndStateWebEventChannel {
 
   void _addHubScript(String? baseUrl) {
     baseUrl = baseUrl ?? 'https://hub.rownd.io';
-    final script = ScriptElement()
-      ..type = 'text/javascript'
-      ..innerHtml = '''
-      !function () { 
+    final script = web.document.createElement('script');
+    script.innerHTML = '''
+      !function () {
       var e = window._rphConfig = window._rphConfig || [];
       let t = window.localStorage.getItem("rph_base_url_override") || "$baseUrl"; e.push(["setBaseUrl", t]);
       var r = document, s = r.createElement("script"), m = r.createElement("script"), a = r.getElementsByTagName("script")[0];
@@ -57,14 +56,14 @@ class RowndStateWebEventChannel {
     } ();
     ''';
 
-    script.onError.listen((error) {
-      print("Failed to load the hub: $error");
-    });
-
-    document.head!.append(script);
+    web.document?.head?.appendChild(script);
   }
 
   void _setStateListener() {
+    void listener(String state) {
+      _listener(state);
+    }
+
     var jsFunction = js.allowInterop((data) {
       _listener(data);
     });
@@ -88,6 +87,7 @@ class RowndStateWebEventChannel {
     if (value == null) {
       return;
     }
+
     if (js.context.hasProperty('_rphConfig')) {
       // Access the existing _rphConfig
       var rphConfig = js.context['_rphConfig'];
