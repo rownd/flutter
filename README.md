@@ -23,14 +23,19 @@ If you don't have one already, be sure to obtain an app key from the [Rownd dash
 
 ### Configure
 
-Next, instantiate the Rownd plugin and call `Rownd.configure(YOUR_APP_KEY)` within your application wherever you do most of your app's initialization.
+Next, instantiate the Rownd plugin and call `rowndPlugin.configure(YOUR_APP_KEY)` within your application wherever you do most of your app's initialization.
 
 Here's an example:
 
 ```dart
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
+import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
+import 'package:rownd_flutter_plugin/state/global_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,13 +50,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _rownd = RowndPlugin();
+  final rowndPlugin = RowndPlugin();
 
   @override
   void initState() {
     super.initState();
 
-    _rownd.configure("REPLACE_WITH_YOUR_APP_KEY");
+    rowndPlugin.configure("REPLACE_WITH_YOUR_APP_KEY");
   }
 }
 ```
