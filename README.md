@@ -7,7 +7,7 @@ Easily add Rownd to your Flutter app.
 This SDK leverages Rownd's native iOS and Android SDKs to provide a simple interface for Flutter developers to add Rownd to their apps.
 
 ### Install
-Begin by depending on `rownd_flutter_plugin` in your `pubspec.yaml`:
+Begin by depending on `rownd_flutter_plugin` and `provider` in your `pubspec.yaml`:
 
 ```yaml
 name: my_app
@@ -16,6 +16,7 @@ name: my_app
 
 dependencies:
     rownd_flutter_plugin: ^1.3.2
+    provider: ^6.1.2
 ```
 
 If you don't have one already, be sure to obtain an app key from the [Rownd dashboard](https://app.rownd.io) for use in the next step.
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
 
     _rownd.configure("REPLACE_WITH_YOUR_APP_KEY");
   }
+}
 ```
 
 ## Usage
@@ -82,19 +84,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _rownd = RowndPlugin();
+  final rowndPlugin = RowndPlugin();
 
   @override
   void initState() {
     super.initState();
 
-    _rownd.configure("REPLACE_WITH_YOUR_APP_KEY");
+    rowndPlugin.configure("REPLACE_WITH_YOUR_APP_KEY");
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => _rownd.state(),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => _rownd.state()),
+          Provider(create: (context) => rowndPlugin)
+        ],
         child: MaterialApp(
           home: Scaffold(
             appBar: AppBar(
@@ -105,13 +110,14 @@ class _MyAppState extends State<MyApp> {
               Consumer<GlobalStateNotifier>(
                 builder: (_, rownd, __) => ElevatedButton(
                     onPressed: () {
+                      var rowndPlugin = Provider.of<RowndPlugin>(context, listen: false);
                       if (rownd.state.auth?.isAuthenticated ?? false) {
-                        _rownd.signOut();
+                        rowndPlugin.signOut();
                       } else {
                         RowndSignInOptions signInOpts = RowndSignInOptions();
                         signInOpts.postSignInRedirect =
                             "https://deeplink.myapp.com";
-                        _rownd.requestSignIn(signInOpts);
+                        rowndPlugin.requestSignIn(signInOpts);
                       }
                     },
                     child: Text((rownd.state.auth?.isAuthenticated ?? false)
