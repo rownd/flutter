@@ -4,19 +4,19 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
-import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
-import 'package:rownd_flutter_plugin/state/global_state.dart';
+
+import 'home.dart';
+import 'splash.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  late RowndPlugin rowndPlugin;
+  final RowndPlugin rowndPlugin = RowndPlugin();
 
   MyApp({super.key}) {
     WidgetsFlutterBinding.ensureInitialized();
-    rowndPlugin = RowndPlugin();
     rowndPlugin.configure("YOUR_APP_KEY");
   }
 
@@ -57,40 +57,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => widget.rowndPlugin.state(),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => widget.rowndPlugin.state()),
+          Provider(create: (context) => widget.rowndPlugin)
+        ],
         child: MaterialApp(
           themeMode: ThemeMode.system,
           darkTheme: ThemeData(brightness: Brightness.dark),
-          home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Plugin example app'),
-            ),
-            body: Consumer<GlobalStateNotifier>(
-              builder: (_, rownd, __) => Column(children: [
-                Center(child: Text('Running on: $_platformVersion\n')),
-                ElevatedButton(
-                    onPressed: () {
-                      if (rownd.state.auth?.isAuthenticated ?? false) {
-                        widget.rowndPlugin.signOut();
-                      } else {
-                        RowndSignInOptions signInOpts = RowndSignInOptions();
-                        signInOpts.postSignInRedirect = "NATIVE_APP";
-                        widget.rowndPlugin.requestSignIn(signInOpts);
-                      }
-                    },
-                    child: Text((rownd.state.auth?.isAuthenticated ?? false)
-                        ? 'Sign out'
-                        : 'Sign in')),
-                if (rownd.state.auth?.isAuthenticated ?? false)
-                  ElevatedButton(
-                      onPressed: () {
-                        widget.rowndPlugin.manageAccount();
-                      },
-                      child: const Text('Manage account'))
-              ]),
-            ),
-          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const SplashScreen(),
+            '/home': (context) => HomeScreen(platformVersion: _platformVersion),
+          },
         ));
   }
 }
