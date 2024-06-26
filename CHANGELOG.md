@@ -1,5 +1,12 @@
 
 
+## [1.3.3](https://github.com/rownd/flutter/compare/1.3.2...1.3.3) (2024-06-26)
+
+
+### Bug Fixes
+
+* mobile method channel init ([#8](https://github.com/rownd/flutter/issues/8)) ([6efb1a7](https://github.com/rownd/flutter/commit/6efb1a790b1625ce5c691ef0fd7cfb4f3960ef50))
+
 ## [1.3.2](https://github.com/rownd/flutter/compare/1.3.1...1.3.2) (2024-05-09)
 
 ## [1.3.1](https://github.com/rownd/flutter/compare/1.3.0...1.3.1) (2024-05-01)
