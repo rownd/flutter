@@ -13,7 +13,7 @@ class MobileMethodChannelRownd extends RowndPlatform {
 
   final eventChannel = RowndStateMobileEventChannel();
 
-  MethodChannelRownd() {
+  MobileMethodChannelRownd() {
     eventChannel.listen();
   }
 
