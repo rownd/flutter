@@ -1,5 +1,12 @@
 
 
+## [1.3.4](https://github.com/rownd/flutter/compare/1.3.3...1.3.4) (2024-07-15)
+
+
+### Bug Fixes
+
+* **deps:** support a wider package version range ([c8239c6](https://github.com/rownd/flutter/commit/c8239c6b66dc9744ab7ce047d76e274f44eb4fbc))
+
 ## [1.3.3](https://github.com/rownd/flutter/compare/1.3.2...1.3.3) (2024-06-26)
 
 

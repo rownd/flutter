@@ -1,6 +1,6 @@
 name: rownd_flutter_plugin
 description: Rownd bindings for Flutter
-version: 1.3.3
+version: 1.3.4
 homepage: https://rownd.com
 environment:
   sdk: '>=3.0.0 <4.0.0'
