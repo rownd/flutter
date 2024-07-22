@@ -25,4 +25,8 @@ class RowndPlugin {
   void manageAccount() {
     RowndPlatform.instance.manageAccount();
   }
+
+  Auth auth = Auth(Passkeys(
+      () => RowndPlatform.instance.auth.passkeys.register(),
+      () => RowndPlatform.instance.auth.passkeys.authenticate()));
 }

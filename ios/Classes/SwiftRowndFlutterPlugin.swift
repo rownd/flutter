@@ -65,6 +65,10 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
             Rownd.signOut()
         case "manageAccount":
             Rownd.manageAccount()
+        case "passkeysRegister":
+            Rownd.auth.passkeys.register()
+        case "passkeysAuthenticate":
+            Rownd.auth.passkeys.authenticate()
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)
         default:

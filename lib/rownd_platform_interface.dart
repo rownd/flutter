@@ -55,8 +55,33 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('manageAccount() has not been implemented.');
   }
 
+  Auth auth = Auth(Passkeys(
+      () => throw UnimplementedError(
+          'passkey.register() has not been implemented'),
+      () => throw UnimplementedError(
+          'passkey.authenticate() has not been implemented')));
+
   GlobalStateNotifier state() {
     throw UnimplementedError('state() has not been implemented.');
+  }
+}
+
+class Auth {
+  final Passkeys passkeys;
+  Auth(this.passkeys);
+}
+
+class Passkeys {
+  Function _register;
+  Function _authenticate;
+  Passkeys(this._register, this._authenticate);
+
+  void register() {
+    _register();
+  }
+
+  void authenticate() {
+    _authenticate();
   }
 }
 

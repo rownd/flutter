@@ -14,7 +14,13 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Plugin example app'),
       ),
       body: Consumer<GlobalStateNotifier>(
-        builder: (_, rownd, __) => Column(children: [
+        builder: (_, rownd, __) {
+          if (rownd.state.auth?.isAuthenticated == false) {
+            Future.delayed(Duration.zero, () {
+              Navigator.of(context).pushReplacementNamed('/');
+            });
+        }
+          return Column(children: [
           Center(child: Text('Running on: $platformVersion\n')),
           ElevatedButton(
               onPressed: () {
@@ -35,7 +41,8 @@ class HomeScreen extends StatelessWidget {
                   rowndPlugin.manageAccount();
                 },
                 child: const Text('Manage account'))
-        ]),
+        ]);
+        }
       ),
     );
   }
