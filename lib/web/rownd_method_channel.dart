@@ -38,6 +38,11 @@ class WebMethodChannelRownd extends RowndPlatform {
   }
 
   @override
+  Auth get auth => Auth(Passkeys(
+      () => webChannel.invokeMethod(['auth','passkeys','promptForPasskeyRegistration']),
+      () => webChannel.invokeMethod(['auth','passkeys','authenticate'])));
+
+  @override
   GlobalStateNotifier state() {
     return webChannel.stateNotifier;
   }
