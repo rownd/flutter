@@ -1,5 +1,12 @@
 
 
+# [1.4.0](https://github.com/rownd/flutter/compare/1.3.4...1.4.0) (2024-07-25)
+
+
+### Features
+
+* add rownd passkey apis ([869c13f](https://github.com/rownd/flutter/commit/869c13f17b439ad2704435ec3425e693fff826ff))
+
 ## [1.3.4](https://github.com/rownd/flutter/compare/1.3.3...1.3.4) (2024-07-15)
 
 
