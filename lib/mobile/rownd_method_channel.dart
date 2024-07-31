@@ -25,7 +25,7 @@ class MobileMethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(RowndConfigure configure) {
+  void configure(RowndConfig configure) {
     methodChannel.invokeMethod('configure', {
       "appKey": configure.appKey,
       "apiUrl": configure.apiUrl,

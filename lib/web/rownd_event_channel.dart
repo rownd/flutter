@@ -37,7 +37,7 @@ class RowndStateWebEventChannel {
         keys.last, data == null ? null : [js.JsObject.jsify(data)]);
   }
 
-  void configure(RowndConfigure configure) {
+  void configure(RowndConfig configure) {
     _addHubScript(configure.baseUrl);
     _setConfigValue('setAppKey', configure.appKey);
     _setConfigValue('setApiUrl', configure.apiUrl);

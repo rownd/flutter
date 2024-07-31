@@ -2,7 +2,7 @@ import 'rownd_platform_interface.dart';
 import 'state/global_state.dart';
 
 class RowndPlugin {
-  void configure(RowndConfigure configure) {
+  void configure(RowndConfig configure) {
     RowndPlatform.instance.configure(configure);
   }
 

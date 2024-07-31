@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 
   MyApp({super.key}) {
     WidgetsFlutterBinding.ensureInitialized();
-    rowndPlugin.configure(RowndConfigure(appKey: 'YOUR_APP_KEY'));
+    rowndPlugin.configure(RowndConfig(appKey: 'YOUR_APP_KEY'));
   }
 
   @override

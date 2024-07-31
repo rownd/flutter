@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    rowndPlugin.configure(RowndConfigure(
+    rowndPlugin.configure(RowndConfig(
         appKey: 'YOUR_APP_KEY'));
   }
 }
@@ -96,7 +96,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    rowndPlugin.configure(RowndConfigure(
+    rowndPlugin.configure(RowndConfig(
         appKey: 'YOUR_APP_KEY'));
   }
 
@@ -165,7 +165,7 @@ class MainActivity: FlutterFragmentActivity() {}
 
 ## API
 
-### `configure(RowndConfigure({ appKey: String }))`
+### `configure(RowndConfig({ appKey: String }))`
 
 Configures the Rownd plugin with your app key. This must be called before any other methods.
 

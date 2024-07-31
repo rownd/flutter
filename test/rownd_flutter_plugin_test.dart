@@ -12,7 +12,7 @@ class MockRowndFlutterPluginPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  void configure(RowndConfigure configure) {
+  void configure(RowndConfig configure) {
     // TODO: implement configure
   }
 

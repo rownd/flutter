@@ -13,7 +13,7 @@ class WebMethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(RowndConfigure configure) {
+  void configure(RowndConfig configure) {
     webChannel.configure(configure);
   }
 
