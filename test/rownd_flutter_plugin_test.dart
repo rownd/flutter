@@ -12,7 +12,7 @@ class MockRowndFlutterPluginPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
+  void configure(RowndConfigure configure) {
     // TODO: implement configure
   }
 
@@ -29,6 +29,16 @@ class MockRowndFlutterPluginPlatform
   @override
   void signOut() {
     // TODO: implement signOut
+  }
+
+  @override
+  Auth get auth => Auth(Passkeys(
+      () => '',
+      () => ''));
+
+  @override
+  set auth(Auth _auth) {
+    // TODO: implement auth
   }
 
   @override

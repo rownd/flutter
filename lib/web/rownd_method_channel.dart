@@ -13,8 +13,8 @@ class WebMethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
-    webChannel.configure(appKey, apiUrl, baseUrl);
+  void configure(RowndConfigure configure) {
+    webChannel.configure(configure);
   }
 
   @override

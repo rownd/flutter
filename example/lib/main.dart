@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
+import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
 
 import 'home.dart';
 import 'splash.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 
   MyApp({super.key}) {
     WidgetsFlutterBinding.ensureInitialized();
-    rowndPlugin.configure("YOUR_APP_KEY");
+    rowndPlugin.configure(RowndConfigure(appKey: 'YOUR_APP_KEY'));
   }
 
   @override
