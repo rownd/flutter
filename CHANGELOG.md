@@ -1,5 +1,7 @@
 
 
+# [2.0.0](https://github.com/rownd/flutter/compare/1.4.0...2.0.0) (2024-08-01)
+
 # [1.4.0](https://github.com/rownd/flutter/compare/1.3.4...1.4.0) (2024-07-25)
 
 
