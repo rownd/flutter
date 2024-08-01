@@ -25,11 +25,12 @@ class MobileMethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
+  void configure(RowndConfig configure) {
     methodChannel.invokeMethod('configure', {
-      "appKey": appKey,
-      "apiUrl": apiUrl,
-      "baseUrl": baseUrl,
+      "appKey": configure.appKey,
+      "apiUrl": configure.apiUrl,
+      "baseUrl": configure.baseUrl,
+      "subdomainExtension": configure.subdomainExtension
     });
   }
 

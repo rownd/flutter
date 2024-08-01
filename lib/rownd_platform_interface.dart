@@ -39,7 +39,7 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
+  void configure(RowndConfig configure) {
     throw UnimplementedError('configure() has not been implemented.');
   }
 
@@ -64,6 +64,14 @@ abstract class RowndPlatform extends PlatformInterface {
   GlobalStateNotifier state() {
     throw UnimplementedError('state() has not been implemented.');
   }
+}
+
+class RowndConfig {
+  final String appKey;
+  final String? apiUrl;
+  final String? baseUrl;
+  final String? subdomainExtension;
+  RowndConfig({required this.appKey, this.apiUrl, this.baseUrl, this.subdomainExtension});
 }
 
 class Auth {

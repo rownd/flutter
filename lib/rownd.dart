@@ -2,8 +2,8 @@ import 'rownd_platform_interface.dart';
 import 'state/global_state.dart';
 
 class RowndPlugin {
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
-    RowndPlatform.instance.configure(appKey, apiUrl, baseUrl);
+  void configure(RowndConfig configure) {
+    RowndPlatform.instance.configure(configure);
   }
 
   GlobalStateNotifier state() {
