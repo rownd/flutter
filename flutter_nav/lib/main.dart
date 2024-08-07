@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    rowndPlugin.configure("key_rvykyqmv3pt3rfqqao0mq9xt");
+    rowndPlugin.configure("YOUR_APP_KEY");
   }
 
   @override
