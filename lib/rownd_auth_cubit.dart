@@ -6,11 +6,11 @@ import 'package:rownd_flutter_plugin/state/global_state.dart';
 
 enum AuthState { authenticated, unauthenticated, loading }
 
-class AuthCubit extends Cubit<AuthState> {
+class RowndAuthCubit extends Cubit<AuthState> {
   final RowndPlugin rowndPlugin;
   final GlobalStateNotifier rowndStateNotifier;
 
-  AuthCubit(this.rowndPlugin)
+  RowndAuthCubit(this.rowndPlugin)
       : rowndStateNotifier = rowndPlugin.state(), // Assign directly in initializer list
         super(AuthState.unauthenticated) {
     // Initialize the cubit by setting up a listener to the authentication state

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
-import 'auth_cubit.dart';
+import 'package:rownd_flutter_plugin/rownd_auth_cubit.dart';
+import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,26 +22,26 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    rowndPlugin.configure("YOUR_APP_KEY");
+    rowndPlugin.configure(RowndConfig(appKey: 'YOUR_APP_KEY'));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(rowndPlugin),
+      create: (context) => RowndAuthCubit(rowndPlugin),
       child: MaterialApp(
         title: 'Example App',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         ),
-        home: BlocListener<AuthCubit, AuthState>(
+        home: BlocListener<RowndAuthCubit, AuthState>(
           listener: (context, state) {
             if (state == AuthState.authenticated) {
               Navigator.pushReplacementNamed(context, '/home');
             }
           },
-          child: BlocBuilder<AuthCubit, AuthState>(
+          child: BlocBuilder<RowndAuthCubit, AuthState>(
             builder: (context, state) {
               if (state == AuthState.authenticated) {
                 return const MyHomePage();
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var authCubit = context.read<AuthCubit>();
+    var authCubit = context.read<RowndAuthCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -91,7 +92,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var authCubit = context.read<AuthCubit>();
+    var authCubit = context.read<RowndAuthCubit>();
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(

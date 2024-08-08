@@ -206,11 +206,10 @@ packages:
   rownd_flutter_plugin:
     dependency: "direct main"
     description:
-      name: rownd_flutter_plugin
-      sha256: dafea7e9b7cd2bc0a57a2ac3d9b7af3dec9f5b586bc80c373eb51d54907d68df
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.0"
+      path: "../.."
+      relative: true
+    source: path
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter

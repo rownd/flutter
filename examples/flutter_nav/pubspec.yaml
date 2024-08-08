@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rownd_flutter_plugin: ^1.3.2
+  rownd_flutter_plugin: 
+    path: ../../
   english_words: ^4.0.0
   provider: ^6.0.0
   flutter_dotenv: ^5.0.2
