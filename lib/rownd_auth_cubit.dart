@@ -39,11 +39,6 @@ class RowndAuthCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     rowndPlugin.signOut();
-    emit(AuthState.unauthenticated);
-  }
-
-  void logout() {
-    emit(AuthState.unauthenticated);
   }
 
   bool isAuthenticated() {
