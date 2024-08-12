@@ -9,9 +9,10 @@ enum AuthState { authenticated, unauthenticated, loading }
 class RowndAuthCubit extends Cubit<AuthState> {
   final RowndPlugin rowndPlugin;
   final GlobalStateNotifier rowndStateNotifier;
+  Map<String, dynamic>? user;
 
   RowndAuthCubit(this.rowndPlugin)
-      : rowndStateNotifier = rowndPlugin.state(), // Assign directly in initializer list
+      : rowndStateNotifier = rowndPlugin.state(),
         super(AuthState.unauthenticated) {
     // Initialize the cubit by setting up a listener to the authentication state
     _initialize();
@@ -23,8 +24,12 @@ class RowndAuthCubit extends Cubit<AuthState> {
     });
   }
 
-  void checkAuthentication() {
+  Future<void> checkAuthentication() async {
     if (rowndStateNotifier.state.auth?.isAuthenticated ?? false) {
+      emit(AuthState.loading);
+      await Future.delayed(const Duration(seconds: 1));
+
+      user = getUserData();
       emit(AuthState.authenticated);
     } else {
       emit(AuthState.unauthenticated);
@@ -43,5 +48,15 @@ class RowndAuthCubit extends Cubit<AuthState> {
 
   bool isAuthenticated() {
     return rowndStateNotifier.state.auth?.isAuthenticated ?? false;
+  }
+
+  Map<String, dynamic> getUserData() {
+    var user = rowndStateNotifier.state.user?.data;
+
+    final firstName = user?['first_name'];
+    final lastName = user?['last_name'];
+    final email = user?['email'];
+
+    return {"first_name": firstName, "last_name": lastName, "email": email};
   }
 }

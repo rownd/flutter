@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_nav/user.dart';
 import 'package:rownd_flutter_plugin/rownd.dart';
 import 'package:rownd_flutter_plugin/rownd_auth_cubit.dart';
 import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
@@ -93,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var authCubit = context.read<RowndAuthCubit>();
+    var user = User.fromJson(authCubit.user);
 
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
@@ -101,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         body: Column(children: [
-          const Center(child: Text('Welcome to my home page!')),
+          Center(child: Text('Welcome to my home page ${user.firstName}!')),
           ElevatedButton(
               onPressed: () async {
                 authCubit.signOut();
