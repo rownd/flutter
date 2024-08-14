@@ -20,43 +20,55 @@ class RowndAuthCubit extends Cubit<AuthState> {
 
   void _initialize() {
     rowndStateNotifier.addListener(() {
-      checkAuthentication();
+      _checkAuthentication();
     });
   }
 
-  Future<void> checkAuthentication() async {
+  Future<void> _checkAuthentication() async {
     if (rowndStateNotifier.state.auth?.isAuthenticated ?? false) {
       emit(AuthState.loading);
-      await Future.delayed(const Duration(seconds: 1));
 
-      user = getUserData();
-      emit(AuthState.authenticated);
+      await _getUserData();
+
+      if (user != null) {
+        emit(AuthState.authenticated);
+      } else {
+        emit(AuthState.unauthenticated);
+      }
     } else {
       emit(AuthState.unauthenticated);
     }
   }
 
-  Future<void> signIn() async {
+  Future<void> signIn([RowndSignInOptions? options]) async {
     emit(AuthState.loading);
-    RowndSignInOptions signInOpts = RowndSignInOptions();
-    rowndPlugin.requestSignIn(signInOpts);
+    rowndPlugin.requestSignIn(options);
   }
 
   Future<void> signOut() async {
     rowndPlugin.signOut();
+    emit(AuthState.unauthenticated);
   }
 
   bool isAuthenticated() {
     return rowndStateNotifier.state.auth?.isAuthenticated ?? false;
   }
 
-  Map<String, dynamic> getUserData() {
-    var user = rowndStateNotifier.state.user?.data;
+  Future<void> _getUserData() async {
+    final userData = rowndStateNotifier.state.user?.data;
+    if (userData!.isEmpty) {
+      user = null;
+      return;
+    }
 
-    final firstName = user?['first_name'];
-    final lastName = user?['last_name'];
-    final email = user?['email'];
+    user = {
+      "firstName": userData['first_name'],
+      "lastName": userData['last_name'],
+      "email": userData['email'],
+    };
+  }
 
-    return {"first_name": firstName, "last_name": lastName, "email": email};
+  void manageAccount() {
+    rowndPlugin.manageAccount();
   }
 }

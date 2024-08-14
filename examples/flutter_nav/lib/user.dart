@@ -4,15 +4,15 @@ class User {
   final String? email;
 
   User({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
+    this.firstName,
+     this.lastName,
+     this.email,
   });
 
   factory User.fromJson(Map<String, dynamic>? json) {
     return User(
-      firstName: json?['first_name'] as String?,
-      lastName: json?['last_name'] as String?,
+      firstName: json?['firstName'] as String?,
+      lastName: json?['lastName'] as String?,
       email: json?['email'] as String?,
     );
   }

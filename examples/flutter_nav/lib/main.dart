@@ -17,13 +17,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // String _platformVersion = 'Unknown';
   final rowndPlugin = RowndPlugin();
 
   @override
   void initState() {
     super.initState();
-    rowndPlugin.configure(RowndConfig(appKey: 'YOUR_APP_KEY'));
+    rowndPlugin.configure(RowndConfig(appKey: 'key_rvykyqmv3pt3rfqqao0mq9xt'));
   }
 
   @override
@@ -36,21 +35,14 @@ class _MyAppState extends State<MyApp> {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         ),
-        home: BlocListener<RowndAuthCubit, AuthState>(
-          listener: (context, state) {
+        home: BlocBuilder<RowndAuthCubit, AuthState>(
+          builder: (context, state) {
             if (state == AuthState.authenticated) {
-              Navigator.pushReplacementNamed(context, '/home');
+              return const MyHomePage();
+            } else {
+              return const LoginPage();
             }
           },
-          child: BlocBuilder<RowndAuthCubit, AuthState>(
-            builder: (context, state) {
-              if (state == AuthState.authenticated) {
-                return const MyHomePage();
-              } else {
-                return const LoginPage();
-              }
-            },
-          ),
         ),
         routes: {
           '/home': (context) => const MyHomePage(),
@@ -65,7 +57,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var authCubit = context.read<RowndAuthCubit>();
+    var authCubit = context.watch<RowndAuthCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -93,25 +85,32 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var authCubit = context.read<RowndAuthCubit>();
+    var authCubit = context.watch<RowndAuthCubit>();
     var user = User.fromJson(authCubit.user);
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('My example app'),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        body: Column(children: [
-          Center(child: Text('Welcome to my home page ${user.firstName}!')),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My example app'),
+      ),
+      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+      body: Column(
+        children: [
+          Center(child: Text('Welcome to my home page, ${user.firstName}!')),
           ElevatedButton(
-              onPressed: () async {
-                authCubit.signOut();
-                Navigator.pushReplacementNamed(context, '/');
-              },
-              child: const Text("Sign out")),
-        ]),
-      );
-    });
+            onPressed: () async {
+              authCubit.signOut();
+              Navigator.pushReplacementNamed(context, '/');
+            },
+            child: const Text("Sign out"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              authCubit.manageAccount();
+            },
+            child: const Text("Manage Account"),
+          ),
+        ],
+      ),
+    );
   }
 }
