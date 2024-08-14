@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    rowndPlugin.configure(RowndConfig(appKey: 'key_rvykyqmv3pt3rfqqao0mq9xt'));
+    rowndPlugin.configure(RowndConfig(appKey: 'YOUR_APP_KEY'));
   }
 
   @override
