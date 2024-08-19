@@ -61,11 +61,7 @@ class RowndCubit extends Cubit<AuthState> {
       return;
     }
 
-    user = {
-      "firstName": userData['first_name'],
-      "lastName": userData['last_name'],
-      "email": userData['email'],
-    };
+    user = userData;
   }
 
   void manageAccount() {
