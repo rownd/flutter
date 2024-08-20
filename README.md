@@ -15,7 +15,7 @@ name: my_app
 ...
 
 dependencies:
-    rownd_flutter_plugin: ^2.0.0
+    rownd_flutter_plugin: ^2.0.1
     provider: ^6.1.2
 ```
 
