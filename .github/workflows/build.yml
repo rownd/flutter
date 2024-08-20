@@ -28,12 +28,12 @@ jobs:
           channel: stable
       - run: flutter pub get
       - run: flutter pub get
-        working-directory: ./example
+        working-directory: ./examples/basic
       #- run: flutter test
       - run: flutter build apk
-        working-directory: ./example
+        working-directory: ./examples/basic
       - run: flutter build appbundle
-        working-directory: ./example
+        working-directory: ./examples/basic
 
   build-ios:
     runs-on: macos-latest
@@ -46,10 +46,10 @@ jobs:
           channel: stable
       - run: flutter pub get
       - run: flutter pub get
-        working-directory: ./example
+        working-directory: ./examples/basic
       #- run: flutter test
       - run: flutter build ios --release --no-codesign
-        working-directory: ./example
+        working-directory: ./examples/basic
 
   build-web:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
           channel: stable
       - run: flutter pub get
       - run: flutter pub get
-        working-directory: ./example
+        working-directory: ./examples/basic
       #- run: flutter test
       - run: flutter build web
-        working-directory: ./example
+        working-directory: ./examples/basic
