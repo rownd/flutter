@@ -200,3 +200,102 @@ The `GlobalStateNotifier` object is a `ChangeNotifier` that notifies its listene
 | `auth` | `RowndAuthState` | The current user's authentication state. |
 | `user` | `RowndUser` | The current user's profile. |
 
+<br>
+<br>
+
+# RowndCubit and BlocProvider Integration
+
+By integrating `RowndCubit` with `BlocProvider`, you can effectively manage the authentication state across your Flutter application. This setup ensures that the UI remains responsive to changes in authentication status, providing a seamless user experience.
+
+Initialize the `RowndPlugin` in the `initState` method and configured with your app key. This setup is required for the Rownd authentication plugin to function correctly.
+
+```dart
+class _MyAppState extends State<MyApp> {
+  final rowndPlugin = RowndPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    rowndPlugin.configure(RowndConfig(appKey: 'YOUR_APP_KEY'));
+  }
+}
+```
+
+Use a `BlocProvider` that wraps around the `MaterialApp`, providing the `RowndCubit` to the entire widget tree. `BlocBuilder` listens for changes in the authentication state and determines whether to show the `LoginPage` or `MyHomePage`.
+
+```dart
+@override
+Widget build(BuildContext context) {
+  return BlocProvider(
+    create: (context) => RowndCubit(rowndPlugin),
+    child: MaterialApp(
+      title: 'Example App',
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+      ),
+      home: BlocBuilder<RowndCubit, AuthState>(
+        builder: (context, state) {
+          if (state == AuthState.authenticated) {
+            return const MyHomePage();
+          } else {
+            return const LoginPage();
+          }
+        },
+      ),
+      routes: {
+        '/home': (context) => const MyHomePage(),
+      },
+    ),
+  );
+}
+```
+
+## Usage
+
+In the `LoginPage`, the `RowndCubit` is accessed using `context.watch<RowndCubit>()`. This allows the button to trigger the `signIn` method, initiating the authentication process.
+
+```dart
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var authCubit = context.watch<RowndCubit>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My example app'),
+      ),
+      body: Column(
+        children: [
+          const Center(child: Text('Welcome to my example app!')),
+          ElevatedButton(
+            onPressed: () async {
+              authCubit.signIn();
+            },
+            child: const Text('Sign in'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+## Pre-configured RowndCubit API
+
+`signIn([RowndSignInOptions? options])`\
+Requests that the user sign in. The options parameter is optional and can be used to customize the sign-in process.
+
+`signOut()`\
+Signs the use out.
+
+`isAuthenticated()`\
+Returns a boolean if the user is signed in or out.
+
+`manageAccount()`\
+Displays the current user's profile information, allowing them to update it.
+
+`user`\
+Returns JSON object of the authenticated user's ID, first name, last name, and email.
