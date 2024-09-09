@@ -67,4 +67,8 @@ class RowndCubit extends Cubit<AuthState> {
   void manageAccount() {
     rowndPlugin.manageAccount();
   }
+
+  void registerPasskey() {
+    rowndPlugin.auth.passkeys.register();
+  }
 }
