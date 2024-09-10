@@ -35,6 +35,15 @@ jobs:
       #- run: flutter test
       - run: flutter build apk
         working-directory: ./examples/rownd_about
+      - name: Print env variables
+        run: |
+          echo "KEYSTORE_PASSWORD: $KEYSTORE_PASSWORD"
+          echo "KEY_PASSWORD: $KEY_PASSWORD"
+          echo "KEY_ALIAS: $KEY_ALIAS"
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       - run: flutter build appbundle --release
         working-directory: ./examples/rownd_about
         env:
