@@ -26,14 +26,21 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+      - name: Set up Keystore
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$GITHUB_WORKSPACE/android/app/rowndaboutkey.jks"
       - run: flutter pub get
       - run: flutter pub get
         working-directory: ./examples/rownd_about
       #- run: flutter test
       - run: flutter build apk
         working-directory: ./examples/rownd_about
-      - run: flutter build appbundle
+      - run: flutter build appbundle --release
         working-directory: ./examples/rownd_about
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
 
   build-ios:
     runs-on: macos-latest
