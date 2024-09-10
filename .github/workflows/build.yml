@@ -29,6 +29,8 @@ jobs:
       - name: Set up Keystore
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > "./examples/rownd_about/android/app/rowndaboutkey.jks"
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
       - run: flutter pub get
       - run: flutter pub get
         working-directory: ./examples/rownd_about
