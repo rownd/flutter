@@ -53,17 +53,26 @@ class _GuessingGameState extends State<GuessingGame> {
   }
 
   void _stopStopwatch() {
-    if (_isRunning) {
+    if (_isRunning && _timer.isActive) {
       _timer.cancel();
       _isRunning = false;
     }
   }
 
   void _resetStopwatch() {
-    _stopStopwatch();
+    if (_isRunning && _timer.isActive) {
+      _stopStopwatch();
+    }
     setState(() {
       _milliseconds = 0;
     });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Cancel the timer when the widget is disposed
+    _controller.dispose(); // Dispose of the TextEditingController
+    super.dispose();
   }
 
   void _checkGuess() {
