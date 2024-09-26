@@ -70,8 +70,10 @@ class _GuessingGameState extends State<GuessingGame> {
 
   @override
   void dispose() {
-    _timer.cancel(); // Cancel the timer when the widget is disposed
-    _controller.dispose(); // Dispose of the TextEditingController
+    if (_isRunning && _timer.isActive) {
+      _timer.cancel();
+    }
+    _controller.dispose();
     super.dispose();
   }
 
