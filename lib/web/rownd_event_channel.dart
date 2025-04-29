@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:rownd_flutter_plugin/rownd_platform_interface.dart';
 import 'package:rownd_flutter_plugin/state/domain/app.dart';
-import 'package:rownd_flutter_plugin/state/domain/auth.dart';
+import 'package:rownd_flutter_plugin/state/domain/auth.dart' as authState;
 import 'package:rownd_flutter_plugin/state/domain/user.dart';
 import 'package:rownd_flutter_plugin/state/global_state.dart';
 
@@ -12,12 +13,12 @@ class WebState {
   WebState({this.user, this.app, this.auth});
   User? user;
   App? app;
-  Auth? auth;
+  authState.Auth? auth;
 
   WebState.fromJson(Map<String, dynamic> json) {
     user = User.fromJson(json['user']);
     app = App.fromJson(json["app"]);
-    auth = Auth.fromJson(json['auth']);
+    auth = authState.Auth.fromJson(json['auth']);
   }
 }
 
@@ -36,10 +37,10 @@ class RowndStateWebEventChannel {
         keys.last, data == null ? null : [js.JsObject.jsify(data)]);
   }
 
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
-    _addHubScript(baseUrl);
-    _setConfigValue('setAppKey', appKey);
-    _setConfigValue('setApiUrl', apiUrl);
+  void configure(RowndConfig configure) {
+    _addHubScript(configure.baseUrl);
+    _setConfigValue('setAppKey', configure.appKey);
+    _setConfigValue('setApiUrl', configure.apiUrl);
     _setStateListener();
   }
 

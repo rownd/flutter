@@ -82,6 +82,8 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
           }
         }
       }
+      "passkeysRegister" -> Rownd.auth().passkeys().register()
+      "passkeysAuthenticate" -> Rownd.auth().passkeys().authenticate()
       else -> result.notImplemented()
     }
   }

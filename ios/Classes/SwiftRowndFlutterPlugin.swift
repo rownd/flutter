@@ -50,6 +50,10 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
                 if let apiUrl = args["apiUrl"] as? String {
                     Rownd.config.apiUrl = apiUrl
                 }
+                
+                if let subdomainExtension = args["subdomainExtension"] as? String {
+                    Rownd.config.subdomainExtension = subdomainExtension
+                }
                 Task {
                     await Rownd.configure(launchOptions: nil, appKey: appKey)
                 }
@@ -65,6 +69,10 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
             Rownd.signOut()
         case "manageAccount":
             Rownd.manageAccount()
+        case "passkeysRegister":
+            Rownd.auth.passkeys.register()
+        case "passkeysAuthenticate":
+            Rownd.auth.passkeys.authenticate()
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)
         case "getAccessToken":

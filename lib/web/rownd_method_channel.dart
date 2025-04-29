@@ -13,8 +13,8 @@ class WebMethodChannelRownd extends RowndPlatform {
   }
 
   @override
-  void configure(String appKey, [String? apiUrl, String? baseUrl]) {
-    webChannel.configure(appKey, apiUrl, baseUrl);
+  void configure(RowndConfig configure) {
+    webChannel.configure(configure);
   }
 
   @override
@@ -36,6 +36,11 @@ class WebMethodChannelRownd extends RowndPlatform {
   manageAccount() {
     webChannel.invokeMethod(['user', 'manageAccount']);
   }
+
+  @override
+  Auth get auth => Auth(Passkeys(
+      () => webChannel.invokeMethod(['auth','passkeys','promptForPasskeyRegistration']),
+      () => webChannel.invokeMethod(['auth','passkeys','authenticate'])));
 
   @override
   GlobalStateNotifier state() {
