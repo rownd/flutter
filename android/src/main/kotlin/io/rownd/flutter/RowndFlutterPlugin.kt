@@ -21,6 +21,7 @@ import io.rownd.android.RowndSignInOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** RowndFlutterPlugin */
 class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -72,13 +73,17 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         CoroutineScope(Dispatchers.IO).launch {
           try {
             val accessToken = Rownd.getAccessToken(throwIfMissing = true)
-            if (accessToken != null) {
-              result.success(accessToken)
-            } else {
-              result.error("NO_ACCESS_TOKEN", "No access token found", null)
+            withContext(Dispatchers.Main) {
+              if (accessToken != null) {
+                result.success(accessToken)
+              } else {
+                result.error("NO_ACCESS_TOKEN", "No access token found", null)
+              }
             }
           } catch (e: Exception) {
-            result.error("GET_ACCESS_TOKEN_ERROR", e.message, null)
+            withContext(Dispatchers.Main) {
+              result.error("GET_ACCESS_TOKEN_ERROR", e.message, null)
+            }
           }
         }
       }
