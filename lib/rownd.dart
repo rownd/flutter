@@ -25,4 +25,8 @@ class RowndPlugin {
   void manageAccount() {
     RowndPlatform.instance.manageAccount();
   }
+
+  Future<String?> getAccessToken() {
+    return RowndPlatform.instance.getAccessToken();
+  }
 }

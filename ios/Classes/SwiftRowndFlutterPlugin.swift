@@ -67,6 +67,14 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
             Rownd.manageAccount()
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)
+        case "getAccessToken":
+            Task {
+                if let accessToken = try? await Rownd.getAccessToken() {
+                    result(accessToken)
+                } else {
+                    result(FlutterError(code: "NO_ACCESS_TOKEN", message: "No access token found", details: nil))
+                }
+            }
         default:
             result(FlutterMethodNotImplemented)
         }

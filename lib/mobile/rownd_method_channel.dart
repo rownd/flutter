@@ -54,6 +54,11 @@ class MobileMethodChannelRownd extends RowndPlatform {
   }
 
   @override
+  Future<String?> getAccessToken() {
+    return methodChannel.invokeMethod<String>('getAccessToken');
+  }
+
+  @override
   GlobalStateNotifier state() {
     return eventChannel.stateNotifier;
   }

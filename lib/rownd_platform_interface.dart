@@ -55,6 +55,10 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('manageAccount() has not been implemented.');
   }
 
+  Future<String?> getAccessToken() {
+    throw UnimplementedError('getAccessToken() has not been implemented.');
+  }
+
   GlobalStateNotifier state() {
     throw UnimplementedError('state() has not been implemented.');
   }

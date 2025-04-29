@@ -27,6 +27,16 @@ class HomeScreen extends StatelessWidget {
                 }
               },
               child: const Text('Sign out')),
+          ElevatedButton(
+              onPressed: () {
+                var rowndPlugin =
+                    Provider.of<RowndPlugin>(context, listen: false);
+                () async {
+                  var token = await rowndPlugin.getAccessToken();
+                  print('Access token: $token');
+                }();
+              },
+              child: const Text('Get token')),
           if (rownd.state.auth?.isAuthenticated ?? false)
             ElevatedButton(
                 onPressed: () {
@@ -34,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                       Provider.of<RowndPlugin>(context, listen: false);
                   rowndPlugin.manageAccount();
                 },
-                child: const Text('Manage account'))
+                child: const Text('Manage account')),
         ]),
       ),
     );
