@@ -1,5 +1,12 @@
 
 
+# [3.0.0](https://github.com/rownd/flutter/compare/2.0.1...3.0.0) (2025-04-30)
+
+
+### Features
+
+* **api:** allow fetching tokens imperatively ([#14](https://github.com/rownd/flutter/issues/14)) ([74168c3](https://github.com/rownd/flutter/commit/74168c315e91e59de40803bbd0ddd64cbf5bdbf7))
+
 ## [2.0.1](https://github.com/rownd/flutter/compare/2.0.0...2.0.1) (2024-08-20)
 
 # [2.0.0](https://github.com/rownd/flutter/compare/1.4.0...2.0.0) (2024-08-01)
