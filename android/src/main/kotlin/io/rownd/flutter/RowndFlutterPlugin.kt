@@ -18,6 +18,10 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 import io.rownd.android.Rownd
 import io.rownd.android.RowndSignInOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /** RowndFlutterPlugin */
 class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -65,6 +69,24 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       }
       "signOut" -> Rownd.signOut()
       "manageAccount" -> Rownd.manageAccount()
+      "getAccessToken" -> {
+        CoroutineScope(Dispatchers.IO).launch {
+          try {
+            val accessToken = Rownd.getAccessToken(throwIfMissing = true)
+            withContext(Dispatchers.Main) {
+              if (accessToken != null) {
+                result.success(accessToken)
+              } else {
+                result.error("NO_ACCESS_TOKEN", "No access token found", null)
+              }
+            }
+          } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+              result.error("GET_ACCESS_TOKEN_ERROR", e.message, null)
+            }
+          }
+        }
+      }
       "passkeysRegister" -> Rownd.auth().passkeys().register()
       "passkeysAuthenticate" -> Rownd.auth().passkeys().authenticate()
       else -> result.notImplemented()

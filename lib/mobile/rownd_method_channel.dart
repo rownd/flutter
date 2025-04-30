@@ -10,7 +10,7 @@ class MobileMethodChannelRownd extends RowndPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('rownd_flutter_plugin');
-  
+
   final eventChannel = RowndStateMobileEventChannel();
 
   MobileMethodChannelRownd() {
@@ -52,6 +52,11 @@ class MobileMethodChannelRownd extends RowndPlatform {
   @override
   manageAccount() {
     methodChannel.invokeMethod('manageAccount');
+  }
+
+  @override
+  Future<String?> getAccessToken() {
+    return methodChannel.invokeMethod<String>('getAccessToken');
   }
 
   @override

@@ -55,6 +55,10 @@ abstract class RowndPlatform extends PlatformInterface {
     throw UnimplementedError('manageAccount() has not been implemented.');
   }
 
+  Future<String?> getAccessToken() {
+    throw UnimplementedError('getAccessToken() has not been implemented.');
+  }
+
   Auth auth = Auth(Passkeys(
       () => throw UnimplementedError(
           'passkey.register() has not been implemented'),
@@ -71,7 +75,11 @@ class RowndConfig {
   final String? apiUrl;
   final String? baseUrl;
   final String? subdomainExtension;
-  RowndConfig({required this.appKey, this.apiUrl, this.baseUrl, this.subdomainExtension});
+  RowndConfig(
+      {required this.appKey,
+      this.apiUrl,
+      this.baseUrl,
+      this.subdomainExtension});
 }
 
 class Auth {

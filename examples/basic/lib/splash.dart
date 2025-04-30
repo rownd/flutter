@@ -21,14 +21,30 @@ class SplashScreen extends StatelessWidget {
             title: const Text('Welcome to the app'),
           ),
           body: Center(
-            child: ElevatedButton(
-              onPressed: () {
-                final rowndPlugin =
-                    Provider.of<RowndPlugin>(context, listen: false);
-                rowndPlugin.requestSignIn();
-              },
-              child: const Text('Sign in'),
-            ),
+            child: Column(children: [
+              ElevatedButton(
+                onPressed: () {
+                  final rowndPlugin =
+                      Provider.of<RowndPlugin>(context, listen: false);
+                  rowndPlugin.requestSignIn();
+                },
+                child: const Text('Sign in'),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    var rowndPlugin =
+                        Provider.of<RowndPlugin>(context, listen: false);
+                    () async {
+                      try {
+                        var token = await rowndPlugin.getAccessToken();
+                        print('Access token: $token');
+                      } catch (e) {
+                        print('Error getting access token: $e');
+                      }
+                    }();
+                  },
+                  child: const Text('Get token'))
+            ]),
           ),
         );
       },

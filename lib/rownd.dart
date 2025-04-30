@@ -26,6 +26,10 @@ class RowndPlugin {
     RowndPlatform.instance.manageAccount();
   }
 
+  Future<String?> getAccessToken() {
+    return RowndPlatform.instance.getAccessToken();
+  }
+
   Auth auth = Auth(Passkeys(
       () => RowndPlatform.instance.auth.passkeys.register(),
       () => RowndPlatform.instance.auth.passkeys.authenticate()));
