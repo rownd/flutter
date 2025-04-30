@@ -50,7 +50,7 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
                 if let apiUrl = args["apiUrl"] as? String {
                     Rownd.config.apiUrl = apiUrl
                 }
-                
+
                 if let subdomainExtension = args["subdomainExtension"] as? String {
                     Rownd.config.subdomainExtension = subdomainExtension
                 }
@@ -77,10 +77,14 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
             result("iOS " + UIDevice.current.systemVersion)
         case "getAccessToken":
             Task {
-                if let accessToken = try? await Rownd.getAccessToken() {
-                    result(accessToken)
-                } else {
-                    result(FlutterError(code: "NO_ACCESS_TOKEN", message: "No access token found", details: nil))
+                do {
+                    if let accessToken = try await Rownd.getAccessToken(throwIfMissing: true) {
+                        result(accessToken)
+                    } else {
+                        result(FlutterError(code: "NO_ACCESS_TOKEN", message: "No access token found", details: nil))
+                    }
+                } catch {
+                    result(FlutterError(code: "ERROR_GETTING_ACCESS_TOKEN", message: error.localizedDescription, details: nil))
                 }
             }
         default:
