@@ -57,24 +57,7 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
         case "getAccessToken":
             handleGetAccessToken(result: result)
         case "user.get":
-            do {
-                let user = Rownd.user.get()
-                let userObj: [String: Any?] = [
-                    "data": user.data.mapValues { $0.value },
-                    "meta": user.meta?.mapValues { $0.value },
-                    "state": user.state.rawValue,
-                    "auth_level": user.authLevel.rawValue
-                ]
-
-                if let jsonData = try? JSONSerialization.data(withJSONObject: userObj, options: []),
-                   let jsonString = String(data: jsonData, encoding: .utf8) {
-                    result(jsonString)
-                } else {
-                    result(FlutterError(code: "INVALID_DATA", message: "Failed to convert user data to JSON string", details: nil))
-                }
-            } catch {
-            result(FlutterError(code: "ERROR_ENCODING_USER_DATA", message: error.localizedDescription, details: nil))
-            }
+            handleUserGet(call: call, result: result)
         case "user.getValue":
             handleUserGetValue(call: call, result: result)
         case "user.set":
@@ -126,6 +109,27 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
             } catch {
                 result(FlutterError(code: "ERROR_GETTING_ACCESS_TOKEN", message: error.localizedDescription, details: nil))
             }
+        }
+    }
+
+    private func handleUserGet(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        do {
+            let user = Rownd.user.get()
+            let userObj: [String: Any?] = [
+                "data": user.data.mapValues { $0.value },
+                "meta": user.meta?.mapValues { $0.value },
+                "state": user.state.rawValue,
+                "auth_level": user.authLevel.rawValue
+            ]
+
+            if let jsonData = try? JSONSerialization.data(withJSONObject: userObj, options: []),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                    result(jsonString)
+            } else {
+                result(FlutterError(code: "INVALID_DATA", message: "Failed to convert user data to JSON string", details: nil))
+            }
+        } catch {
+            result(FlutterError(code: "ERROR_ENCODING_USER_DATA", message: error.localizedDescription, details: nil))
         }
     }
 
