@@ -9,6 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var rowndPlugin = Provider.of<RowndPlugin>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Plugin example app'),
@@ -42,14 +43,43 @@ class HomeScreen extends StatelessWidget {
                 }();
               },
               child: const Text('Get token')),
-          if (rownd.state.auth?.isAuthenticated ?? false)
-            ElevatedButton(
-                onPressed: () {
-                  var rowndPlugin =
-                      Provider.of<RowndPlugin>(context, listen: false);
-                  rowndPlugin.manageAccount();
-                },
-                child: const Text('Manage account'))
+          ElevatedButton(
+              onPressed: () {
+                var rowndPlugin =
+                    Provider.of<RowndPlugin>(context, listen: false);
+                rowndPlugin.manageAccount();
+              },
+              child: const Text('Manage account')),
+          ElevatedButton(
+              onPressed: () {
+                var rowndPlugin =
+                    Provider.of<RowndPlugin>(context, listen: false);
+                var uuid = UniqueKey().toString();
+                rowndPlugin.user.setValue('first_name', uuid);
+              },
+              child: const Text('Set user value')),
+          Text(rownd.state.user?.data?['first_name'] ?? 'No value set'),
+          ElevatedButton(
+              onPressed: () async {
+                var rowndPlugin =
+                    Provider.of<RowndPlugin>(context, listen: false);
+                var user = await rowndPlugin.user.get();
+                if (user != null) {
+                  var uuid = UniqueKey().toString();
+                  user.data?['last_name'] = uuid;
+                  rowndPlugin.user.set(user);
+                }
+              },
+              child: const Text('Update entire user object')),
+          Text(rownd.state.user?.data?['last_name'] ?? 'No value set'),
+          ElevatedButton(
+              onPressed: () async {
+                var rowndPlugin =
+                    Provider.of<RowndPlugin>(context, listen: false);
+                var user = await rowndPlugin.user.get();
+                print('User: ${user?.toJson()}');
+              },
+              child: const Text('Print user')),
         ]);
       }),
     );

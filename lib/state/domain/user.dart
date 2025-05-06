@@ -4,10 +4,12 @@ part 'user.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake, explicitToJson: true)
 class User {
-  User({this.data});
+  User({this.data, this.state, this.authLevel});
 
   String? get id => data?['user_id'];
   Map<String, dynamic>? data;
+  String? state;
+  String? authLevel;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 

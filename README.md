@@ -187,6 +187,18 @@ Signs the user out.
 
 Displays the current user's profile information, allowing them to update it.
 
+### `user.get()`
+Returns the current user's profile information as a `User` object.
+
+### `user.getValue(String key)`
+Returns the value associated with the specified key for the current user.
+
+### `user.set(User user)`
+Sets the current user's profile information to the specified `User` object.
+
+### `user.setValue(String key, dynamic value)`
+Sets the value associated with the specified key for the current user.
+
 ### `state()`
 
 Returns a `GlobalStateNotifier` object that can be used to listen for changes to the Rownd state.

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../rownd_platform_interface.dart';
+import '../state/domain/user.dart';
 import 'rownd_event_channel.dart';
 import '../state/global_state.dart';
 
@@ -58,6 +61,24 @@ class MobileMethodChannelRownd extends RowndPlatform {
   Future<String?> getAccessToken() {
     return methodChannel.invokeMethod<String>('getAccessToken');
   }
+
+  @override
+  UserRepo get user => UserRepo(
+        get: () => methodChannel.invokeMethod("user.get").then((value) {
+          if (value == null) {
+            return null;
+          }
+          if (value is String) {
+            return User.fromJson(jsonDecode(value) as Map<String, dynamic>);
+          }
+          return User.fromJson(value);
+        }),
+        set: (User user) => methodChannel.invokeMethod("user.set", user.data),
+        setValue: (String key, dynamic value) => methodChannel
+            .invokeMethod("user.setValue", {"key": key, "value": value}),
+        getValue: (String key) =>
+            methodChannel.invokeMethod("user.getValue", key),
+      );
 
   @override
   Auth get auth => Auth(Passkeys(

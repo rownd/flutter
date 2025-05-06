@@ -1,4 +1,5 @@
 import 'rownd_platform_interface.dart';
+import 'state/domain/user.dart';
 import 'state/global_state.dart';
 
 class RowndPlugin {
@@ -33,4 +34,11 @@ class RowndPlugin {
   Auth auth = Auth(Passkeys(
       () => RowndPlatform.instance.auth.passkeys.register(),
       () => RowndPlatform.instance.auth.passkeys.authenticate()));
+
+  UserRepo user = UserRepo(
+      get: () => RowndPlatform.instance.user.get(),
+      set: (User user) => RowndPlatform.instance.user.set(user),
+      setValue: (String key, dynamic value) =>
+          RowndPlatform.instance.user.setValue(key, value),
+      getValue: (String key) => RowndPlatform.instance.user.getValue(key));
 }
