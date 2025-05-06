@@ -127,7 +127,7 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         }
       }
       "user.set" -> {
-        val userData = call.argument<Map<String, Any>>("user")
+        val userData = call.arguments<Map<String, Any>>()
         if (userData != null) {
           CoroutineScope(Dispatchers.IO).launch {
             try {
