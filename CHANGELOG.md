@@ -1,5 +1,12 @@
 
 
+# [3.1.0](https://github.com/rownd/flutter/compare/3.0.0...3.1.0) (2025-05-06)
+
+
+### Features
+
+* **api:** get and set user data ([#15](https://github.com/rownd/flutter/issues/15)) ([57a5fee](https://github.com/rownd/flutter/commit/57a5fee85bf6bf91e83a42ef99567ccd8ef8444c))
+
 # [3.0.0](https://github.com/rownd/flutter/compare/2.0.1...3.0.0) (2025-04-30)
 
 
