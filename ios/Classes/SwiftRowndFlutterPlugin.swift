@@ -145,6 +145,7 @@ public class SwiftRowndFlutterPlugin: NSObject, FlutterPlugin {
                 let decoder = JSONDecoder()
                 if let userDict = try? decoder.decode([String: AnyCodable].self, from: jsonData) {
                     Rownd.user.set(data: userDict)
+                    result(nil)
                 } else {
                     result(FlutterError(code: "INVALID_ARGUMENTS", message: "Failed to decode arguments", details: nil))
                 }
