@@ -22,6 +22,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 /** RowndFlutterPlugin */
 class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -89,6 +91,80 @@ class RowndFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       }
       "passkeysRegister" -> Rownd.auth().passkeys().register()
       "passkeysAuthenticate" -> Rownd.auth().passkeys().authenticate()
+      "user.get" -> {
+        CoroutineScope(Dispatchers.IO).launch {
+          try {
+            val json = Json { encodeDefaults = true }
+            val user = Rownd.user.get()
+            val userJson = json.encodeToString(user)
+            withContext(Dispatchers.Main) {
+              result.success(userJson)
+            }
+          } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+              result.error("GET_USER_ERROR", e.message, null)
+            }
+          }
+        }
+      }
+      "user.getValue" -> {
+        val key = call.argument<String>("key")
+        if (key != null) {
+          CoroutineScope(Dispatchers.IO).launch {
+            try {
+              val value = Rownd.user.get<Any>(key)
+              withContext(Dispatchers.Main) {
+                result.success(value)
+              }
+            } catch (e: Exception) {
+              withContext(Dispatchers.Main) {
+                result.error("GET_USER_VALUE_ERROR", e.message, null)
+              }
+            }
+          }
+        } else {
+          result.error("INVALID_ARGUMENT", "Key is null", null)
+        }
+      }
+      "user.set" -> {
+        val userData = call.argument<Map<String, Any>>("user")
+        if (userData != null) {
+          CoroutineScope(Dispatchers.IO).launch {
+            try {
+              Rownd.user.set(userData)
+              withContext(Dispatchers.Main) {
+                result.success(null)
+              }
+            } catch (e: Exception) {
+              withContext(Dispatchers.Main) {
+                result.error("SET_USER_ERROR", e.message, null)
+              }
+            }
+          }
+        } else {
+          result.error("INVALID_ARGUMENT", "User map is null", null)
+        }
+      }
+      "user.setValue" -> {
+        val key = call.argument<String>("key")
+        val value = call.argument<Any>("value")
+        if (key != null && value != null) {
+          CoroutineScope(Dispatchers.IO).launch {
+            try {
+              Rownd.user.set(key, value)
+              withContext(Dispatchers.Main) {
+                result.success(null)
+              }
+            } catch (e: Exception) {
+              withContext(Dispatchers.Main) {
+                result.error("SET_USER_VALUE_ERROR", e.message, null)
+              }
+            }
+          }
+        } else {
+          result.error("INVALID_ARGUMENT", "Key or value is null", null)
+        }
+      }
       else -> result.notImplemented()
     }
   }
